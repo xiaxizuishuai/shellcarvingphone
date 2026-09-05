@@ -1,0 +1,1713 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>制作流程 - 贝漾涌起</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Konva.js 库 -->
+  <script src="https://cdn.jsdelivr.net/npm/konva@9/konva.min.js"></script>
+</head>
+
+<body class="process-page">
+  <header class="app-header">
+    <div class="brand">
+      <div class="brand-mark">贝</div>
+      <h1 class="brand-title">贝漾涌起</h1>
+    </div>
+    <nav class="nav" aria-label="主导航">
+      <a href="index.html" class="pill">首页</a>
+      <a href="process.html" class="pill active">制作流程</a>
+      <a href="ip.html" class="pill">IP形象</a>
+      <a href="products.html" class="pill">周边产品</a>
+      <a href="云工坊.html" class="pill">云工坊</a>
+    </nav>
+    <div class="header-actions">
+      <a href="products.html" class="cart-button">
+        <span class="cart-icon">🛒</span>
+        <span class="cart-label">购物车</span>
+      </a>
+      <button id="hamburgerBtn" class="hamburger-btn" type="button" aria-label="打开导航菜单" aria-expanded="false" aria-controls="mobileDrawer">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 移动端侧滑抽屉导航 -->
+  <div id="drawerBackdrop" class="drawer-backdrop" aria-hidden="true"></div>
+  <aside id="mobileDrawer" class="mobile-drawer" role="dialog" aria-modal="true" aria-label="移动端主导航" aria-hidden="true">
+    <div class="drawer-header">
+      <div class="drawer-user-card" id="drawerUserCard">
+        <div class="drawer-avatar">🐚</div>
+        <div class="drawer-user-info">
+          <div class="drawer-user-name" id="drawerUserName">欢迎来到贝漾涌起</div>
+          <button class="drawer-auth-btn" id="drawerAuthBtn" type="button">点击登录 / 注册</button>
+        </div>
+      </div>
+      <button id="drawerClose" class="drawer-close-btn" type="button" aria-label="关闭导航菜单">✕</button>
+    </div>
+    <nav class="drawer-nav">
+      <a href="index.html" class="drawer-link"><span class="drawer-icon">🏠</span> 首页</a>
+      <a href="process.html" class="drawer-link active"><span class="drawer-icon">📜</span> 制作流程</a>
+      <a href="ip.html" class="drawer-link"><span class="drawer-icon">🐚</span> IP形象 · 贝贝</a>
+      <a href="products.html" class="drawer-link"><span class="drawer-icon">🛍️</span> 周边产品</a>
+      <a href="云工坊.html" class="drawer-link"><span class="drawer-icon">🎨</span> 贝雕云工坊</a>
+    </nav>
+    <div class="drawer-footer">
+      <p>🐚 传承千年贝雕技艺 · 弘扬海洋文化</p>
+    </div>
+  </aside>
+
+  <main class="process-main">
+    <!-- Background Layers -->
+    <div class="process-bg-gradient"></div>
+    <div class="process-bg-overlay tiffany-overlay"></div>
+    <div class="process-bg-overlay radial-glow"></div>
+    <div class="sparkle-container" id="sparkleContainer"></div>
+
+    <!-- Intro Section -->
+    <section class="process-intro">
+      <h2 class="process-intro-title">贝雕制作流程</h2>
+      <p class="process-intro-subtitle">了解传统贝雕工艺的精湛技艺，感受每一件作品背后的匠心独运</p>
+    </section>
+
+    <!-- Carousel Container -->
+    <section class="process-carousel-wrapper" aria-label="制作流程轮播">
+      <button class="carousel-nav-btn carousel-prev" aria-label="上一个流程" id="prevBtn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </button>
+
+      <div class="process-carousel-container">
+        <div class="process-carousel-track" id="carouselTrack">
+          <div class="process-card" data-step="1">
+            <div class="card-image-wrapper">
+              <img src="https://xiaxizuishuai.github.io/img/shellcarvingimages/media_037.jpg" alt="选材" class="card-image" loading="lazy">
+              <div class="card-overlay"></div>
+            </div>
+            <div class="card-content">
+              <div class="card-number">01</div>
+              <h3 class="card-title">选材</h3>
+              <p class="card-subtitle">精选天然贝壳，根据作品需求选择合适大小、形状和质地的贝壳。优质的贝壳是制作精美贝雕作品的基础。</p>
+              <a href="material-secret.html" class="card-secret-btn">
+                <span>🔍</span>
+                <span>查看选材秘密</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="process-card" data-step="2">
+            <div class="card-image-wrapper">
+              <img src="https://xiaxizuishuai.github.io/img/shellcarvingimages/media_023.jpg" alt="设计" class="card-image" loading="lazy">
+              <div class="card-overlay"></div>
+            </div>
+            <div class="card-content">
+              <div class="card-number">02</div>
+              <h3 class="card-title">设计</h3>
+              <p class="card-subtitle">根据贝壳的自然形态和纹理，设计出符合美学要求的图案。设计师需要充分发挥想象力，将贝壳的天然美与艺术创作相结合。</p>
+              <button class="card-design-btn" onclick="openDesignWorkshop()">
+                <span>🎨</span>
+                <span>开始设计</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="process-card" data-step="3">
+            <div class="card-image-wrapper">
+              <img src="https://xiaxizuishuai.github.io/img/shellcarvingimages/media_041.jpg" alt="雕刻" class="card-image" loading="lazy">
+              <div class="card-overlay"></div>
+            </div>
+            <div class="card-content">
+              <div class="card-number">03</div>
+              <h3 class="card-title">雕刻</h3>
+              <p class="card-subtitle">使用专业的雕刻工具，按照设计图案进行精细雕刻。这一步骤需要极高的技艺和耐心，每一刀都要精准到位。</p>
+              <a href="carving.html" class="card-secret-btn">
+                <span>🔨</span>
+                <span>探索雕刻技法</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="process-card" data-step="4">
+            <div class="card-image-wrapper">
+              <img src="https://xiaxizuishuai.github.io/img/shellcarvingimages/media_011.jpg" alt="打磨" class="card-image" loading="lazy">
+              <div class="card-overlay"></div>
+            </div>
+            <div class="card-content">
+              <div class="card-number">04</div>
+              <h3 class="card-title">打磨</h3>
+              <p class="card-subtitle">对雕刻完成的作品进行细致的打磨，使表面光滑细腻，突出贝壳的天然光泽和纹理美感。</p>
+            </div>
+          </div>
+
+          <div class="process-card" data-step="5">
+            <div class="card-image-wrapper">
+              <img src="https://xiaxizuishuai.github.io/img/shellcarvingimages/media_012.jpg" alt="抛光" class="card-image" loading="lazy">
+              <div class="card-overlay"></div>
+            </div>
+            <div class="card-content">
+              <div class="card-number">05</div>
+              <h3 class="card-title">抛光</h3>
+              <p class="card-subtitle">通过专业的抛光工艺，让作品呈现出珍珠般的光泽，使其更加精美动人。</p>
+            </div>
+          </div>
+
+          <div class="process-card" data-step="6">
+            <div class="card-image-wrapper">
+              <img src="https://xiaxizuishuai.github.io/img/shellcarvingimages/media_010.jpg" alt="成品" class="card-image" loading="lazy">
+              <div class="card-overlay"></div>
+            </div>
+            <div class="card-content">
+              <div class="card-number">06</div>
+              <h3 class="card-title">成品</h3>
+              <p class="card-subtitle">经过多道工序的精心制作，一件精美的贝雕艺术品终于完成，每一件都是独一无二的艺术珍品。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="carousel-nav-btn carousel-next" aria-label="下一个流程" id="nextBtn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </button>
+    </section>
+  </main>
+
+  <!-- 图片放大模态框 -->
+  <div id="imageModal" class="image-modal" onclick="closeImageModal()">
+    <div class="image-modal-content" onclick="event.stopPropagation()">
+      <button class="image-modal-close" onclick="closeImageModal()">✕</button>
+      <img id="modalImage" src="" alt="放大图片">
+    </div>
+  </div>
+
+  <!-- 设计工坊模态框 -->
+  <div id="designBackdrop" class="design-backdrop"></div>
+  <div id="designModal" class="design-modal design-modal-fullscreen" role="dialog" aria-hidden="true" aria-label="设计工坊">
+    <div class="design-modal-header">
+      <div class="shell-decoration">
+        <span class="shell-icon">🎨</span>
+        <h2>灵感工坊：设计属于你的海洋传说</h2>
+      </div>
+      <button id="designClose" class="icon-btn" type="button" aria-label="关闭">✕</button>
+    </div>
+
+    <div class="design-modal-content">
+      <!-- 设计内容展示区 -->
+      <div class="design-content-section">
+        <div class="design-intro">
+          <h3>🌊 沧海拾遗：指尖上的海洋诗篇</h3>
+          <p class="design-quote">"每一枚贝壳都听过大海的呼吸，每一刀雕琢都刻录了时光的痕迹。"</p>
+
+          <div class="design-showcase">
+            <div class="showcase-item">
+              <div class="showcase-image" onclick="openImageModal('https://xiaxizuishuai.github.io/img/shellcarvingimages/media_024.jpg')" style="cursor: pointer;">
+                <img src="https://xiaxizuishuai.github.io/img/shellcarvingimages/media_024.jpg" alt="振翅流光 · 翠羽胸针" onerror="this.style.display='none'">
+                <div class="image-overlay">🔍 点击放大</div>
+              </div>
+              <h4>01. 振翅流光 · 翠羽胸针</h4>
+              <p><strong>【灵感】</strong> 取意"惊鸿一瞥，振翅高飞"。</p>
+              <p><strong>【工艺】</strong> 甄选拥有极高折光率的天然鲍鱼贝，利用贝壳原本的自然弧度，纯手工打磨出飞鸟羽翼的层次感。</p>
+              <p><strong>【赏析】</strong></p>
+              <ul>
+                <li><strong>幻彩流金：</strong> 贝壳特有的结构色在光线下流转，从深邃的墨蓝过渡到梦幻的极光绿，仿佛将海浪的波光凝固在羽尖。</li>
+                <li><strong>灵动之美：</strong> 每一根羽毛的纹理都经过精细雕琢，鸟身洁白温润，金爪刚劲有力，静止的胸针却拥有破空而出的动态美。</li>
+              </ul>
+            </div>
+
+            <div class="showcase-item">
+              <div class="showcase-image" onclick="openImageModal('https://xiaxizuishuai.github.io/img/shellcarvingimages/media_025.jpg')" style="cursor: pointer;">
+                <img src="https://xiaxizuishuai.github.io/img/shellcarvingimages/media_025.jpg" alt="弦音入鬓 · 琵琶螺钿梳" onerror="this.style.display='none'">
+                <div class="image-overlay">🔍 点击放大</div>
+              </div>
+              <h4>02. 弦音入鬓 · 琵琶螺钿梳</h4>
+              <p><strong>【灵感】</strong> 致敬东方古典乐器——琵琶，"未成曲调先有情"。</p>
+              <p><strong>【工艺】</strong> 采用传统的<strong>螺钿镶嵌</strong>技艺。在深色硬木基底上，嵌入精细打磨的贝壳花片。</p>
+              <p><strong>【赏析】</strong></p>
+              <ul>
+                <li><strong>黑白辉映：</strong> 沉稳的檀木色与剔透的贝壳白形成强烈视觉对比，尽显东方雅韵。</li>
+                <li><strong>花开无声：</strong> 梳背之上的花卉图案并非彩绘，而是借用贝壳天然的珍珠光泽。随着视角变化，花朵仿佛在木纹间缓缓绽放。这不仅是一把梳子，更是一件可把玩的掌中雅物。</li>
+              </ul>
+            </div>
+
+            <div class="showcase-item">
+              <div class="showcase-image" onclick="openImageModal('https://xiaxizuishuai.github.io/img/shellcarvingimages/media_026.jpg')" style="cursor: pointer;">
+                <img src="https://xiaxizuishuai.github.io/img/shellcarvingimages/media_026.jpg" alt="匠心 · 浑然天成" onerror="this.style.display='none'">
+                <div class="image-overlay">🔍 点击放大</div>
+              </div>
+              <h4>03. 匠心 · 浑然天成</h4>
+              <p><strong>【核心】</strong> 始于自然，成于匠心。</p>
+              <p><strong>【解读】</strong></p>
+              <ul>
+                <li><strong>原材之美：</strong> 每一件贝雕的诞生，都始于对数万枚原生贝壳的甄选。无论是夜光螺的莹白，还是鲍鱼贝的绚烂，都是大自然的鬼斧神工。</li>
+                <li><strong>毫厘之功：</strong> 从原贝的切割、打磨，到拼接、镶嵌，匠人需要在极薄的脆性材料上施展毫厘功夫。那双粗糙的手与精致的贝花形成鲜明对比——这正是非遗的真谛：用时间，去打磨永恒。
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 画板工具区 -->
+      <div class="design-canvas-section">
+        <div class="canvas-toolbar">
+          <div class="tool-group">
+            <label>画笔工具</label>
+            <div class="tool-buttons">
+              <button class="tool-btn active" data-tool="draw" onclick="setTool('draw')">✏️ 画笔</button>
+              <button class="tool-btn" data-tool="sticker" onclick="setTool('sticker')">🎨 贴纸</button>
+              <button class="tool-btn" data-tool="move" onclick="setTool('move')">✋ 移动</button>
+              <button class="tool-btn" data-tool="eraser" onclick="setTool('eraser')">🧹 橡皮</button>
+            </div>
+          </div>
+
+          <div class="tool-group" id="drawControls">
+            <label>画笔设置</label>
+            <div class="slider-group">
+              <label>大小: <span id="brushSizeVal">10</span>px</label>
+              <input type="range" id="brushSize" min="1" max="50" value="10" oninput="updateBrushSize(this.value)">
+            </div>
+            <div class="color-picker-group">
+              <label>颜色:</label>
+              <input type="color" id="brushColor" value="#000000" onchange="updateBrushColor(this.value)">
+              <div class="color-presets">
+                <div class="color-preset" style="background: #000000" onclick="setColor('#000000')" title="黑色"></div>
+                <div class="color-preset" style="background: #FFFFFF; border: 1px solid #ccc;"
+                  onclick="setColor('#FFFFFF')" title="白色"></div>
+                <div class="color-preset" style="background: #FF0000" onclick="setColor('#FF0000')" title="红色"></div>
+                <div class="color-preset" style="background: #FF6B6B" onclick="setColor('#FF6B6B')" title="粉红"></div>
+                <div class="color-preset" style="background: #FF7043" onclick="setColor('#FF7043')" title="橙红"></div>
+                <div class="color-preset" style="background: #FFD700" onclick="setColor('#FFD700')" title="金色"></div>
+                <div class="color-preset" style="background: #FFEB3B" onclick="setColor('#FFEB3B')" title="黄色"></div>
+                <div class="color-preset" style="background: #4CAF50" onclick="setColor('#4CAF50')" title="绿色"></div>
+                <div class="color-preset" style="background: #3CB7A3" onclick="setColor('#3CB7A3')" title="青绿"></div>
+                <div class="color-preset" style="background: #00BCD4" onclick="setColor('#00BCD4')" title="青色"></div>
+                <div class="color-preset" style="background: #3A91C6" onclick="setColor('#3A91C6')" title="蓝色"></div>
+                <div class="color-preset" style="background: #2196F3" onclick="setColor('#2196F3')" title="天蓝"></div>
+                <div class="color-preset" style="background: #9C27B0" onclick="setColor('#9C27B0')" title="紫色"></div>
+                <div class="color-preset" style="background: #E91E63" onclick="setColor('#E91E63')" title="粉紫"></div>
+                <div class="color-preset" style="background: #795548" onclick="setColor('#795548')" title="棕色"></div>
+                <div class="color-preset" style="background: #607D8B" onclick="setColor('#607D8B')" title="灰蓝"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tool-group" id="stickerControls" style="display: none;">
+            <label>选择贴纸</label>
+            <div class="sticker-grid">
+              <div class="sticker-item" onclick="addSticker('https://xiaxizuishuai.github.io/img/shellcarvingimages/media_002.png')">
+                <img src="https://xiaxizuishuai.github.io/img/shellcarvingimages/media_002.png" alt="印花1" onerror="this.style.display='none'">
+                <span>青花纹</span>
+              </div>
+              <div class="sticker-item" onclick="addSticker('https://xiaxizuishuai.github.io/img/shellcarvingimages/media_003.png')">
+                <img src="https://xiaxizuishuai.github.io/img/shellcarvingimages/media_003.png" alt="印花2" onerror="this.style.display='none'">
+                <span>缠枝纹</span>
+              </div>
+              <div class="sticker-item" onclick="addSticker('https://xiaxizuishuai.github.io/img/shellcarvingimages/media_004.jpg')">
+                <img src="https://xiaxizuishuai.github.io/img/shellcarvingimages/media_004.jpg" alt="印花3" onerror="this.style.display='none'">
+                <span>莲花纹</span>
+              </div>
+              <div class="sticker-item" onclick="addSticker('https://xiaxizuishuai.github.io/img/shellcarvingimages/media_005.jpg')">
+                <img src="https://xiaxizuishuai.github.io/img/shellcarvingimages/media_005.jpg" alt="印花4" onerror="this.style.display='none'">
+                <span>海棠纹</span>
+              </div>
+            </div>
+            <div class="slider-group">
+              <label>大小: <span id="stickerSizeVal">1.0</span>x</label>
+              <input type="range" id="stickerSize" min="0.5" max="2" step="0.1" value="1"
+                oninput="updateStickerSize(this.value)">
+            </div>
+          </div>
+
+          <div class="tool-group">
+            <label>画布背景</label>
+            <div class="shell-bg-selector">
+              <button class="shell-bg-btn" onclick="setCanvasBackground('https://xiaxizuishuai.github.io/img/shellcarvingimages/media_027.png', this)" title="贝壳1">
+                <img src="https://xiaxizuishuai.github.io/img/shellcarvingimages/media_027.png" alt="贝壳1" onerror="this.style.display='none'">
+                <span>贝壳1</span>
+              </button>
+              <button class="shell-bg-btn" onclick="setCanvasBackground('https://xiaxizuishuai.github.io/img/shellcarvingimages/media_028.png', this)" title="贝壳2">
+                <img src="https://xiaxizuishuai.github.io/img/shellcarvingimages/media_028.png" alt="贝壳2" onerror="this.style.display='none'">
+                <span>贝壳2</span>
+              </button>
+              <button class="shell-bg-btn" onclick="setCanvasBackground('white', this)" title="白色背景">
+                <span style="font-size: 24px;">⚪</span>
+                <span>白色</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="tool-group">
+            <label>画布控制</label>
+            <div class="tool-buttons">
+              <button class="tool-btn" onclick="zoomIn()" title="放大">🔍+</button>
+              <button class="tool-btn" onclick="zoomOut()" title="缩小">🔍-</button>
+              <button class="tool-btn" onclick="resetZoom()" title="重置缩放">🔍↻</button>
+            </div>
+            <div class="slider-group">
+              <label>缩放: <span id="zoomLevel">100</span>%</label>
+              <input type="range" id="zoomSlider" min="50" max="300" value="100" step="10"
+                oninput="setZoom(this.value)">
+            </div>
+          </div>
+
+          <div class="tool-group">
+            <label>绘制辅助</label>
+            <div class="slider-group">
+              <label>
+                <input type="checkbox" id="smoothDrawing" checked onchange="updateSmoothDrawing()">
+                平滑绘制（减少手抖）
+              </label>
+            </div>
+            <div class="slider-group">
+              <label>
+                <input type="checkbox" id="brushPreview" checked onchange="updateBrushPreview()">
+                画笔预览
+              </label>
+            </div>
+          </div>
+
+          <div class="tool-group">
+            <button class="btn-clear" onclick="clearCanvas()">🗑️ 清空画布</button>
+            <button class="btn-save" onclick="saveDesign()">💾 保存设计</button>
+            <button class="tool-btn" onclick="undo()" title="撤销">↶ 撤销</button>
+            <button class="tool-btn" onclick="redo()" title="重做">↷ 重做</button>
+          </div>
+        </div>
+
+        <div class="canvas-wrapper">
+          <div id="designCanvasContainer"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <p>© <span id="year">2023</span> 贝漾涌起 | 传承千年贝雕技艺，弘扬海洋文化</p>
+    <p>联系我们: contact@sheli-art.com | 关注微信公众号: 贝雕艺术</p>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const yearEl = document.getElementById('year');
+      if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+      }
+
+      initProcessCarousel();
+      initSparkleBackground();
+    });
+
+    function initProcessCarousel() {
+      const track = document.getElementById('carouselTrack');
+      const cards = document.querySelectorAll('.process-card');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+
+      if (!track || cards.length === 0) return;
+
+      let currentIndex = 0;
+      const totalCards = cards.length;
+      let autoPlayInterval = null;
+      const autoPlayDelay = 1500; // 1.5秒自动切换
+      let isAnimating = false; // 动画进行中标志
+      let isTransitioning = false; // 过渡状态标志
+      let lastClickTime = 0; // 上次点击时间
+      const clickThrottle = 300; // 点击节流时间（毫秒）
+
+      // 获取卡片宽度（响应式）
+      function getCardWidth() {
+        const width = window.innerWidth;
+        if (width <= 768) return 280;
+        if (width <= 1024) return 350;
+        if (width <= 1440) return 400;
+        return 500;
+      }
+
+      // 循环显示：始终显示3张卡片（中间+左右各一张），卡片一个个移动
+      function updateCarousel() {
+        const cardWidth = getCardWidth();
+        const gap = 32;
+
+        cards.forEach((card, index) => {
+          // 计算相对于当前索引的位置
+          let relativeIndex = index - currentIndex;
+
+          // 处理循环：确保相对索引在 -1 到 1 之间（显示3张卡片）
+          if (relativeIndex > totalCards / 2) {
+            relativeIndex -= totalCards;
+          } else if (relativeIndex < -totalCards / 2) {
+            relativeIndex += totalCards;
+          }
+
+          // 只显示当前卡片及其左右各一张
+          if (Math.abs(relativeIndex) <= 1) {
+            card.style.display = 'block';
+            const translateX = relativeIndex * (cardWidth + gap);
+            const scale = relativeIndex === 0 ? 1 : 0.8;
+            card.style.transition = 'transform 0.4s ease, scale 0.4s ease';
+            card.style.transform = `translateX(${translateX}px) scale(${scale})`;
+            card.style.width = `${cardWidth}px`;
+          } else {
+            card.style.display = 'none';
+          }
+
+          // 更新卡片状态类
+          card.classList.remove('active', 'prev', 'next');
+
+          if (relativeIndex === 0) {
+            card.classList.add('active');
+          } else if (relativeIndex === -1) {
+            card.classList.add('prev');
+          } else if (relativeIndex === 1) {
+            card.classList.add('next');
+          }
+        });
+      }
+
+      function goToSlide(index, skipAnimation = false) {
+        // 防止在动画进行中重复调用
+        if (isAnimating && !skipAnimation) {
+          return;
+        }
+
+        // 节流：防止快速点击
+        const now = Date.now();
+        if (!skipAnimation && now - lastClickTime < clickThrottle) {
+          return;
+        }
+        lastClickTime = now;
+
+        const targetIndex = (index + totalCards) % totalCards;
+
+        // 如果目标索引与当前相同，不执行
+        if (targetIndex === currentIndex && !skipAnimation) {
+          return;
+        }
+
+        isAnimating = true;
+        isTransitioning = true;
+
+        currentIndex = targetIndex;
+        updateCarousel();
+
+        // 动画完成后重置标志
+        setTimeout(() => {
+          isAnimating = false;
+          isTransitioning = false;
+        }, 450); // 略大于CSS transition时间，确保动画完成
+
+        if (!skipAnimation) {
+          resetAutoPlay();
+        }
+      }
+
+      function nextSlide() {
+        if (isAnimating) return;
+        goToSlide(currentIndex + 1);
+      }
+
+      function prevSlide() {
+        if (isAnimating) return;
+        goToSlide(currentIndex - 1);
+      }
+
+      function startAutoPlay() {
+        stopAutoPlay(); // 先停止，避免重复启动
+        autoPlayInterval = setInterval(() => {
+          if (!isAnimating) {
+            goToSlide(currentIndex + 1, true); // 自动播放时跳过动画检查
+          }
+        }, autoPlayDelay);
+      }
+
+      function stopAutoPlay() {
+        if (autoPlayInterval) {
+          clearInterval(autoPlayInterval);
+          autoPlayInterval = null;
+        }
+      }
+
+      function resetAutoPlay() {
+        stopAutoPlay();
+        // 延迟启动自动播放，避免与手动操作冲突
+        setTimeout(() => {
+          if (!isAnimating) {
+            startAutoPlay();
+          }
+        }, 500);
+      }
+
+      // 防抖处理按钮点击
+      let buttonClickTimer = null;
+      prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (isAnimating) return;
+
+        if (buttonClickTimer) {
+          clearTimeout(buttonClickTimer);
+        }
+
+        buttonClickTimer = setTimeout(() => {
+          prevSlide();
+          stopAutoPlay();
+          setTimeout(() => {
+            if (!isAnimating) {
+              startAutoPlay();
+            }
+          }, 5000); // 点击后5秒再开始自动播放
+        }, 50);
+      });
+
+      nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (isAnimating) return;
+
+        if (buttonClickTimer) {
+          clearTimeout(buttonClickTimer);
+        }
+
+        buttonClickTimer = setTimeout(() => {
+          nextSlide();
+          stopAutoPlay();
+          setTimeout(() => {
+            if (!isAnimating) {
+              startAutoPlay();
+            }
+          }, 5000);
+        }, 50);
+      });
+
+      // 循环模式下按钮始终可用
+      prevBtn.disabled = false;
+      nextBtn.disabled = false;
+
+      // 移动端触摸手势（Touch Swipe）支持
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchStartTime = 0;
+
+      track.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) {
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+          touchStartTime = Date.now();
+          stopAutoPlay();
+        }
+      }, { passive: true });
+
+      track.addEventListener('touchend', (e) => {
+        if (e.changedTouches.length === 1) {
+          const touchEndX = e.changedTouches[0].clientX;
+          const touchEndY = e.changedTouches[0].clientY;
+          const diffX = touchEndX - touchStartX;
+          const diffY = touchEndY - touchStartY;
+
+          // 仅当水平滑动距离大于垂直滑动，且位移超过 35px 时判定为翻牌手势
+          if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 35) {
+            if (diffX < 0) {
+              nextSlide();
+            } else {
+              prevSlide();
+            }
+          }
+          // 滑动后延迟重启自动轮播
+          setTimeout(() => {
+            if (!isAnimating) {
+              startAutoPlay();
+            }
+          }, 5000);
+        }
+      }, { passive: true });
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (isAnimating) return;
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          prevSlide();
+        }
+        if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          nextSlide();
+        }
+      });
+
+      // Touch/swipe support
+      let startX = 0;
+      let isDragging = false;
+      let dragStartTime = 0;
+
+      track.addEventListener('mousedown', (e) => {
+        if (isAnimating) return;
+        isDragging = true;
+        startX = e.clientX;
+        dragStartTime = Date.now();
+      });
+
+      track.addEventListener('mousemove', (e) => {
+        if (!isDragging || isAnimating) return;
+        e.preventDefault();
+      });
+
+      track.addEventListener('mouseup', (e) => {
+        if (!isDragging || isAnimating) return;
+        isDragging = false;
+        const diffX = startX - e.clientX;
+        const dragDuration = Date.now() - dragStartTime;
+
+        // 只有拖拽距离足够且时间合理时才触发
+        if (Math.abs(diffX) > 50 && dragDuration < 500) {
+          if (diffX > 0) {
+            nextSlide();
+          } else {
+            prevSlide();
+          }
+        }
+        startX = 0;
+        dragStartTime = 0;
+      });
+
+      track.addEventListener('mouseleave', () => {
+        isDragging = false;
+        startX = 0;
+        dragStartTime = 0;
+      });
+
+      // Touch events
+      track.addEventListener('touchstart', (e) => {
+        if (isAnimating) return;
+        startX = e.touches[0].clientX;
+        dragStartTime = Date.now();
+      }, { passive: true });
+
+      track.addEventListener('touchmove', (e) => {
+        if (!startX || isAnimating) return;
+        // 允许滚动，但记录位置
+      }, { passive: true });
+
+      track.addEventListener('touchend', (e) => {
+        if (!startX || isAnimating) return;
+        const diffX = startX - e.changedTouches[0].clientX;
+        const dragDuration = Date.now() - dragStartTime;
+
+        // 只有拖拽距离足够且时间合理时才触发
+        if (Math.abs(diffX) > 50 && dragDuration < 500) {
+          if (diffX > 0) {
+            nextSlide();
+          } else {
+            prevSlide();
+          }
+        }
+        startX = 0;
+        dragStartTime = 0;
+      }, { passive: true });
+
+      // Initialize
+      updateCarousel();
+      startAutoPlay();
+
+      // Pause auto-play on hover
+      track.addEventListener('mouseenter', () => {
+        stopAutoPlay();
+      });
+      track.addEventListener('mouseleave', () => {
+        if (!isAnimating) {
+          startAutoPlay();
+        }
+      });
+
+      // Responsive handling
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          // 重新计算卡片尺寸并更新位置
+          updateCarousel();
+        }, 250);
+      });
+
+      // 初始化时确保卡片正确显示
+      setTimeout(() => {
+        updateCarousel();
+      }, 100);
+    }
+
+    function initSparkleBackground() {
+      const container = document.getElementById('sparkleContainer');
+      if (!container) return;
+
+      const particleCount = 75;
+      // 根据 processbackground.json 的百分比分布
+      const colorWeights = [
+        { color: 'rgba(10, 186, 181, 0.6)', weight: 40 }, // tiffanyBright
+        { color: 'rgba(255, 255, 255, 0.8)', weight: 30 }, // white
+        { color: 'rgba(10, 186, 181, 0.4)', weight: 20 }, // tiffanyMedium
+        { color: 'rgba(200, 240, 255, 0.6)', weight: 10 }  // lightBlue
+      ];
+
+      function getWeightedColor() {
+        const totalWeight = colorWeights.reduce((sum, item) => sum + item.weight, 0);
+        let random = Math.random() * totalWeight;
+        for (const item of colorWeights) {
+          random -= item.weight;
+          if (random <= 0) return item.color;
+        }
+        return colorWeights[0].color;
+      }
+
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'sparkle-particle';
+
+        const size = Math.random() * 4 + 2;
+        const color = getWeightedColor();
+        const duration = Math.random() * 5 + 3;
+        const delay = Math.random() * 2;
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
+
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.backgroundColor = color;
+        particle.style.left = `${x}%`;
+        particle.style.top = `${y}%`;
+        particle.style.animationDuration = `${duration}s`;
+        particle.style.animationDelay = `${delay}s`;
+
+        container.appendChild(particle);
+      }
+    }
+
+    // ========== 设计工坊功能（使用 Konva.js） ==========
+    let stage = null;
+    let backgroundLayer = null; // 背景层（网格、背景图片）
+    let drawingLayer = null; // 绘制层（画笔、橡皮擦）
+    let stickerLayer = null; // 贴纸层
+    let currentTool = 'draw';
+    let isDrawing = false;
+    let brushSize = 10;
+    let brushColor = '#000000';
+    let stickerScale = 1.0;
+    let selectedStickerSrc = null;
+    let currentLine = null; // 当前绘制的线条
+    let canvasBackground = null; // 存储背景图片路径
+    let backgroundImageNode = null; // Konva 背景图片节点
+    let zoomLevel = 1; // 缩放级别
+    let smoothDrawing = true; // 平滑绘制
+    let brushPreviewEnabled = true; // 画笔预览
+    let brushPreviewCircle = null; // 画笔预览圆圈
+    let previewLayer = null; // 预览层
+    let history = []; // 历史记录（用于撤销/重做）
+    let historyIndex = -1; // 当前历史记录索引
+    let smoothingPoints = []; // 平滑绘制的点数组
+
+    function openDesignWorkshop() {
+      const backdrop = document.getElementById('designBackdrop');
+      const modal = document.getElementById('designModal');
+
+      if (!backdrop || !modal) {
+        console.error('设计工坊模态框元素未找到');
+        return;
+      }
+
+      // 确保模态框有全屏类
+      if (!modal.classList.contains('design-modal-fullscreen')) {
+        modal.classList.add('design-modal-fullscreen');
+      }
+
+      backdrop.classList.add('visible');
+      modal.classList.add('visible');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+
+      // 强制重新计算样式
+      void modal.offsetWidth;
+
+      // 初始化 Konva 画布 - 增加延迟确保DOM完全渲染
+      setTimeout(() => {
+        initKonvaCanvas();
+        // 如果初始化失败，再试一次
+        if (!stage) {
+          setTimeout(() => initKonvaCanvas(), 300);
+        }
+      }, 200);
+    }
+
+    function closeDesignWorkshop() {
+      const backdrop = document.getElementById('designBackdrop');
+      const modal = document.getElementById('designModal');
+
+      if (backdrop) backdrop.classList.remove('visible');
+      if (modal) {
+        modal.classList.remove('visible');
+        modal.setAttribute('aria-hidden', 'true');
+      }
+      document.body.style.overflow = '';
+    }
+
+    function initKonvaCanvas() {
+      const container = document.getElementById('designCanvasContainer');
+      if (!container) {
+        console.error('画布容器元素未找到');
+        return;
+      }
+
+      // 获取容器尺寸
+      const rect = container.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) {
+        console.warn('画布容器尺寸为0，等待渲染...');
+        setTimeout(() => initKonvaCanvas(), 200);
+        return;
+      }
+
+      // 如果已经初始化，先销毁
+      if (stage) {
+        stage.destroy();
+        stage = null;
+      }
+
+      // 设置容器样式，确保可见
+      container.style.display = 'block';
+      container.style.width = '1200px';
+      container.style.height = '900px';
+      container.style.minWidth = '1200px';
+      container.style.minHeight = '900px';
+      container.style.background = 'white';
+      container.style.border = '2px solid #e0e7ef';
+      container.style.borderRadius = '12px';
+      container.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+      container.style.position = 'relative';
+
+      // 创建 Konva Stage
+      stage = new Konva.Stage({
+        container: 'designCanvasContainer',
+        width: 1200,
+        height: 900
+      });
+
+      // 确保画布可见
+      const canvas = stage.getContent();
+      if (canvas) {
+        canvas.style.display = 'block';
+        canvas.style.width = '1200px';
+        canvas.style.height = '900px';
+      }
+
+      console.log('Konva Stage 创建完成，容器尺寸:', container.offsetWidth, 'x', container.offsetHeight);
+
+      // 创建背景层
+      backgroundLayer = new Konva.Layer();
+      stage.add(backgroundLayer);
+
+      // 创建绘制层
+      drawingLayer = new Konva.Layer();
+      stage.add(drawingLayer);
+
+      // 创建贴纸层
+      stickerLayer = new Konva.Layer();
+      stage.add(stickerLayer);
+
+      // 创建画笔预览层
+      previewLayer = new Konva.Layer();
+      stage.add(previewLayer);
+
+      // 创建画笔预览圆圈
+      brushPreviewCircle = new Konva.Circle({
+        radius: brushSize / 2,
+        fill: brushColor,
+        opacity: 0.3,
+        stroke: brushColor,
+        strokeWidth: 1,
+        visible: false,
+        listening: false
+      });
+      previewLayer.add(brushPreviewCircle);
+
+      // 设置默认背景
+      if (!canvasBackground) {
+        canvasBackground = 'white';
+        drawGridBackground();
+      } else {
+        setCanvasBackground(canvasBackground, null);
+      }
+
+      // 绑定画布事件
+      setupKonvaEvents();
+
+      // 更新工具状态
+      setTool(currentTool);
+
+      // 初始化历史记录
+      saveHistory();
+
+      console.log('Konva.js 画布初始化完成');
+    }
+
+    function setupKonvaEvents() {
+      if (!stage) return;
+
+      // 鼠标/触摸按下事件
+      stage.on('mousedown touchstart', function (e) {
+        const pos = stage.getPointerPosition();
+        if (!pos) return;
+
+        if (currentTool === 'draw') {
+          startDrawing(pos);
+        } else if (currentTool === 'sticker' && selectedStickerSrc) {
+          addStickerAtPosition(selectedStickerSrc, pos.x, pos.y);
+        } else if (currentTool === 'eraser') {
+          startErasing(pos);
+        }
+      });
+
+      // 鼠标/触摸移动事件
+      stage.on('mousemove touchmove', function (e) {
+        const pos = stage.getPointerPosition();
+        if (!pos) return;
+
+        // 更新画笔预览位置
+        if (brushPreviewEnabled && brushPreviewCircle && (currentTool === 'draw' || currentTool === 'eraser')) {
+          brushPreviewCircle.position(pos);
+          brushPreviewCircle.radius(brushSize / 2);
+          brushPreviewCircle.fill(currentTool === 'eraser' ? '#ffffff' : brushColor);
+          brushPreviewCircle.stroke(currentTool === 'eraser' ? '#cccccc' : brushColor);
+          brushPreviewCircle.visible(true);
+          previewLayer.draw();
+        }
+
+        if (!isDrawing) return;
+
+        if (currentTool === 'draw') {
+          continueDrawing(pos);
+        } else if (currentTool === 'eraser') {
+          continueErasing(pos);
+        }
+      });
+
+      // 鼠标/触摸释放事件
+      stage.on('mouseup touchend', function () {
+        if (isDrawing) {
+          stopDrawing();
+        }
+
+        // 隐藏画笔预览
+        if (brushPreviewCircle) {
+          brushPreviewCircle.visible(false);
+          previewLayer.draw();
+        }
+      });
+
+      // 鼠标离开画布
+      stage.on('mouseleave', function () {
+        if (isDrawing) {
+          stopDrawing();
+        }
+
+        // 隐藏画笔预览
+        if (brushPreviewCircle) {
+          brushPreviewCircle.visible(false);
+          previewLayer.draw();
+        }
+      });
+    }
+
+    function drawGridBackground() {
+      if (!backgroundLayer) return;
+
+      // 清除旧的网格
+      backgroundLayer.destroyChildren();
+
+      const gridSize = 20;
+      const gridLines = [];
+
+      // 垂直线
+      for (let x = 0; x <= stage.width(); x += gridSize) {
+        const line = new Konva.Line({
+          points: [x, 0, x, stage.height()],
+          stroke: '#f0f0f0',
+          strokeWidth: 1,
+          listening: false
+        });
+        gridLines.push(line);
+      }
+
+      // 水平线
+      for (let y = 0; y <= stage.height(); y += gridSize) {
+        const line = new Konva.Line({
+          points: [0, y, stage.width(), y],
+          stroke: '#f0f0f0',
+          strokeWidth: 1,
+          listening: false
+        });
+        gridLines.push(line);
+      }
+
+      gridLines.forEach(line => backgroundLayer.add(line));
+      backgroundLayer.draw();
+    }
+
+    function setCanvasBackground(bgSrc, btnElement) {
+      if (!stage || !backgroundLayer) {
+        console.error('画布未初始化');
+        return;
+      }
+
+      canvasBackground = bgSrc;
+
+      // 更新按钮状态
+      document.querySelectorAll('.shell-bg-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      if (btnElement) {
+        btnElement.classList.add('active');
+      }
+
+      // 移除旧的背景图片
+      if (backgroundImageNode) {
+        backgroundImageNode.destroy();
+        backgroundImageNode = null;
+      }
+
+      // 清除背景层（保留网格）
+      const gridLines = backgroundLayer.find('.Line');
+      backgroundLayer.destroyChildren();
+
+      if (bgSrc === 'white') {
+        // 白色背景 + 网格
+        stage.fill('#ffffff');
+        drawGridBackground();
+      } else {
+        // 图片背景
+        const imageObj = new Image();
+        imageObj.onload = function () {
+          // 计算缩放比例以适应画布
+          const scale = Math.min(stage.width() / imageObj.width, stage.height() / imageObj.height);
+          const width = imageObj.width * scale;
+          const height = imageObj.height * scale;
+          const x = (stage.width() - width) / 2;
+          const y = (stage.height() - height) / 2;
+
+          backgroundImageNode = new Konva.Image({
+            x: x,
+            y: y,
+            image: imageObj,
+            width: width,
+            height: height,
+            listening: false
+          });
+
+          backgroundLayer.add(backgroundImageNode);
+          backgroundLayer.draw();
+        };
+        imageObj.onerror = function () {
+          // 如果图片加载失败，使用白色背景
+          stage.fill('#ffffff');
+          drawGridBackground();
+          showToast('背景图片加载失败，已切换为白色背景');
+        };
+        imageObj.src = bgSrc;
+      }
+
+      backgroundLayer.draw();
+    }
+
+    // 画笔绘制功能
+    function startDrawing(pos) {
+      if (!drawingLayer) return;
+
+      isDrawing = true;
+      smoothingPoints = []; // 重置平滑点数组
+      smoothingPoints.push(pos);
+
+      // 创建新的线条
+      currentLine = new Konva.Line({
+        points: [pos.x, pos.y],
+        stroke: brushColor,
+        strokeWidth: brushSize,
+        lineCap: 'round',
+        lineJoin: 'round',
+        tension: smoothDrawing ? 0.5 : 0,
+        globalCompositeOperation: 'source-over'
+      });
+
+      drawingLayer.add(currentLine);
+    }
+
+    function continueDrawing(pos) {
+      if (!drawingLayer || !currentLine || !isDrawing) return;
+
+      if (smoothDrawing) {
+        // 平滑绘制：收集点，然后应用平滑算法
+        smoothingPoints.push(pos);
+
+        // 每3个点更新一次，提高性能
+        if (smoothingPoints.length >= 3) {
+          const smoothedPoints = smoothPoints(smoothingPoints);
+          const flatPoints = smoothedPoints.flatMap(p => [p.x, p.y]);
+          currentLine.points(flatPoints);
+          drawingLayer.draw();
+        }
+      } else {
+        // 直接绘制
+        const newPoints = currentLine.points().concat([pos.x, pos.y]);
+        currentLine.points(newPoints);
+        drawingLayer.draw();
+      }
+    }
+
+    function stopDrawing() {
+      if (isDrawing) {
+        isDrawing = false;
+
+        // 如果使用平滑绘制，最后更新一次
+        if (smoothDrawing && smoothingPoints.length > 0 && currentLine) {
+          const smoothedPoints = smoothPoints(smoothingPoints);
+          const flatPoints = smoothedPoints.flatMap(p => [p.x, p.y]);
+          currentLine.points(flatPoints);
+          drawingLayer.draw();
+        }
+
+        // 保存历史记录
+        if (currentLine) {
+          saveHistory();
+        }
+
+        currentLine = null;
+        smoothingPoints = [];
+      }
+    }
+
+    // 平滑点数组（使用简单的移动平均）
+    function smoothPoints(points) {
+      if (points.length < 3) return points;
+
+      const smoothed = [];
+      for (let i = 0; i < points.length; i++) {
+        if (i === 0) {
+          smoothed.push(points[i]);
+        } else if (i === points.length - 1) {
+          smoothed.push(points[i]);
+        } else {
+          // 使用前后三个点的平均值
+          const prev = points[i - 1];
+          const curr = points[i];
+          const next = points[i + 1];
+          smoothed.push({
+            x: (prev.x + curr.x + next.x) / 3,
+            y: (prev.y + curr.y + next.y) / 3
+          });
+        }
+      }
+      return smoothed;
+    }
+
+    // 橡皮擦功能
+    function startErasing(pos) {
+      if (!drawingLayer) return;
+
+      isDrawing = true;
+
+      // 检查是否点击在对象上
+      const shape = stage.getIntersection(pos);
+      if (shape && shape.getLayer() === drawingLayer) {
+        // 删除该对象
+        shape.destroy();
+        drawingLayer.draw();
+        isDrawing = false;
+        showToast('已删除对象');
+        return;
+      }
+
+      // 创建橡皮擦线条（使用白色或透明）
+      currentLine = new Konva.Line({
+        points: [pos.x, pos.y],
+        stroke: '#ffffff',
+        strokeWidth: brushSize * 2,
+        lineCap: 'round',
+        lineJoin: 'round',
+        tension: 0.5,
+        globalCompositeOperation: 'destination-out'
+      });
+
+      drawingLayer.add(currentLine);
+    }
+
+    function continueErasing(pos) {
+      if (!drawingLayer || !currentLine || !isDrawing) return;
+
+      // 添加点到当前线条
+      const newPoints = currentLine.points().concat([pos.x, pos.y]);
+      currentLine.points(newPoints);
+
+      drawingLayer.draw();
+    }
+
+    function setTool(tool) {
+      currentTool = tool;
+
+      // 更新按钮状态
+      document.querySelectorAll('.tool-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('data-tool') === tool) {
+          btn.classList.add('active');
+        }
+      });
+
+      // 显示/隐藏控制面板
+      const drawControls = document.getElementById('drawControls');
+      const stickerControls = document.getElementById('stickerControls');
+
+      if (tool === 'draw' || tool === 'eraser' || tool === 'fill') {
+        if (drawControls) drawControls.style.display = 'block';
+        if (stickerControls) stickerControls.style.display = 'none';
+      } else if (tool === 'sticker') {
+        if (drawControls) drawControls.style.display = 'none';
+        if (stickerControls) stickerControls.style.display = 'block';
+      }
+
+      // 更新 Konva Stage 设置
+      if (stage) {
+        if (tool === 'move') {
+          // 移动模式：允许拖拽贴纸对象
+          stage.draggable(false);
+          // 使贴纸层对象可拖拽
+          if (stickerLayer) {
+            stickerLayer.getChildren().forEach(node => {
+              node.draggable(true);
+            });
+          }
+          stage.container().style.cursor = 'default';
+        } else {
+          // 其他模式：禁用拖拽
+          stage.draggable(false);
+          // 使贴纸层对象不可拖拽
+          if (stickerLayer) {
+            stickerLayer.getChildren().forEach(node => {
+              node.draggable(false);
+            });
+          }
+
+          if (tool === 'eraser') {
+            stage.container().style.cursor = 'grab';
+          } else if (tool === 'fill') {
+            stage.container().style.cursor = 'crosshair';
+          } else if (tool === 'sticker') {
+            stage.container().style.cursor = 'copy';
+          } else {
+            stage.container().style.cursor = 'crosshair';
+          }
+        }
+      }
+    }
+
+    function updateBrushSize(value) {
+      brushSize = parseInt(value);
+      const el = document.getElementById('brushSizeVal');
+      if (el) el.textContent = brushSize;
+    }
+
+    function updateBrushColor(value) {
+      brushColor = value;
+    }
+
+    function setColor(color) {
+      brushColor = color;
+      const colorPicker = document.getElementById('brushColor');
+      if (colorPicker) colorPicker.value = color;
+    }
+
+    function updateStickerSize(value) {
+      stickerScale = parseFloat(value);
+      const el = document.getElementById('stickerSizeVal');
+      if (el) el.textContent = stickerScale.toFixed(1);
+    }
+
+    function addSticker(imgSrc) {
+      selectedStickerSrc = imgSrc;
+
+      // 标记选中的贴纸
+      document.querySelectorAll('.sticker-item').forEach(item => {
+        item.classList.remove('selected');
+      });
+
+      // 找到对应的贴纸项并标记
+      const stickerItems = document.querySelectorAll('.sticker-item');
+      stickerItems.forEach(item => {
+        const img = item.querySelector('img');
+        if (img && img.src.includes(imgSrc.split('/').pop())) {
+          item.classList.add('selected');
+        }
+      });
+
+      // 设置为贴纸模式
+      setTool('sticker');
+
+      // 提示用户点击画布放置贴纸
+      if (stage) {
+        stage.container().style.cursor = 'copy';
+        showToast('已选择贴纸，点击画布放置');
+      }
+    }
+
+    function addStickerAtPosition(imgSrc, x, y) {
+      if (!stage || !stickerLayer) {
+        console.error('画布未初始化');
+        showToast('画布未准备好，请稍候再试');
+        return;
+      }
+
+      if (!imgSrc) {
+        showToast('请先选择贴纸');
+        return;
+      }
+
+      console.log('加载贴纸:', imgSrc);
+
+      // 使用 Konva.Image 加载图片
+      const imageObj = new Image();
+      imageObj.onload = function () {
+        console.log('贴纸加载成功:', imgSrc, '尺寸:', imageObj.width, 'x', imageObj.height);
+
+        // 根据画布大小调整贴纸尺寸
+        const baseScale = Math.min(stage.width() / 1200, stage.height() / 900);
+        const scale = stickerScale * baseScale * 0.2;
+        const width = imageObj.width * scale;
+        const height = imageObj.height * scale;
+
+        // 创建 Konva Image 节点
+        const konvaImage = new Konva.Image({
+          x: x - width / 2,
+          y: y - height / 2,
+          image: imageObj,
+          width: width,
+          height: height,
+          draggable: currentTool === 'move', // 移动模式下可拖拽
+          listening: true
+        });
+
+        // 双击删除贴纸
+        konvaImage.on('dblclick', function () {
+          if (confirm('确定要删除这个贴纸吗？')) {
+            this.destroy();
+            stickerLayer.draw();
+          }
+        });
+
+        // 拖拽结束事件，确保在移动模式下保持可拖拽
+        konvaImage.on('dragend', function () {
+          if (currentTool === 'move') {
+            this.draggable(true);
+          }
+        });
+
+        stickerLayer.add(konvaImage);
+        stickerLayer.draw();
+
+        showToast('贴纸已添加 ✨');
+      };
+
+      imageObj.onerror = function (error) {
+        console.error('贴纸加载失败:', imgSrc, error);
+        showToast('贴纸加载失败: ' + imgSrc.split('/').pop() + '，请检查图片是否存在');
+      };
+
+      imageObj.src = imgSrc;
+    }
+
+    function clearCanvas() {
+      if (!stage) {
+        console.error('画布未初始化');
+        return;
+      }
+
+      if (confirm('确定要清空画布吗？')) {
+        // 清空绘制层
+        if (drawingLayer) {
+          drawingLayer.destroyChildren();
+          drawingLayer.draw();
+        }
+
+        // 清空贴纸层
+        if (stickerLayer) {
+          stickerLayer.destroyChildren();
+          stickerLayer.draw();
+        }
+
+        // 重新设置背景
+        if (canvasBackground === 'white') {
+          drawGridBackground();
+        } else if (canvasBackground) {
+          setCanvasBackground(canvasBackground, null);
+        }
+
+        showToast('画布已清空');
+      }
+    }
+
+    function saveDesign() {
+      if (!stage) {
+        console.error('画布未初始化');
+        return;
+      }
+
+      // 使用 Konva 导出为图片
+      const dataURL = stage.toDataURL({
+        mimeType: 'image/png',
+        quality: 1,
+        pixelRatio: 1
+      });
+
+      // 下载
+      const link = document.createElement('a');
+      link.download = `贝雕设计_${Date.now()}.png`;
+      link.href = dataURL;
+      link.click();
+
+      showToast('设计已保存！');
+    }
+
+    function openImageModal(imgSrc) {
+      console.log('openImageModal called with:', imgSrc); // 调试日志
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      if (!modal) {
+        console.error('图片模态框元素未找到');
+        return;
+      }
+      if (!modalImg) {
+        console.error('图片元素未找到');
+        return;
+      }
+      modalImg.src = imgSrc;
+      modal.classList.add('visible');
+      document.body.style.overflow = 'hidden';
+      console.log('图片模态框已打开');
+    }
+
+    function closeImageModal() {
+      const modal = document.getElementById('imageModal');
+      if (modal) {
+        modal.classList.remove('visible');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function showToast(msg) {
+      // 创建或获取toast元素
+      let toast = document.getElementById('designToast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'designToast';
+        toast.className = 'design-toast';
+        document.body.appendChild(toast);
+      }
+
+      toast.textContent = msg;
+      toast.classList.add('show');
+
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2000);
+    }
+
+    // 绑定关闭按钮
+    document.addEventListener('DOMContentLoaded', () => {
+      const closeBtn = document.getElementById('designClose');
+      const backdrop = document.getElementById('designBackdrop');
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', closeDesignWorkshop);
+      }
+
+      if (backdrop) {
+        backdrop.addEventListener('click', (e) => {
+          if (e.target === backdrop) {
+            closeDesignWorkshop();
+          }
+        });
+      }
+    });
+
+    // 缩放功能
+    function zoomIn() {
+      zoomLevel = Math.min(zoomLevel + 0.1, 3);
+      applyZoom();
+    }
+
+    function zoomOut() {
+      zoomLevel = Math.max(zoomLevel - 0.1, 0.5);
+      applyZoom();
+    }
+
+    function resetZoom() {
+      zoomLevel = 1;
+      applyZoom();
+    }
+
+    function setZoom(value) {
+      zoomLevel = value / 100;
+      applyZoom();
+    }
+
+    function applyZoom() {
+      if (!stage) return;
+
+      const container = document.getElementById('designCanvasContainer');
+      if (container) {
+        const baseWidth = 1200;
+        const baseHeight = 900;
+        container.style.width = (baseWidth * zoomLevel) + 'px';
+        container.style.height = (baseHeight * zoomLevel) + 'px';
+        container.style.overflow = 'auto';
+      }
+
+      stage.scale({ x: zoomLevel, y: zoomLevel });
+      stage.draw();
+
+      // 更新缩放显示
+      const zoomLevelEl = document.getElementById('zoomLevel');
+      if (zoomLevelEl) {
+        zoomLevelEl.textContent = Math.round(zoomLevel * 100);
+      }
+      const zoomSlider = document.getElementById('zoomSlider');
+      if (zoomSlider) {
+        zoomSlider.value = Math.round(zoomLevel * 100);
+      }
+    }
+
+    // 平滑绘制切换
+    function updateSmoothDrawing() {
+      const checkbox = document.getElementById('smoothDrawing');
+      smoothDrawing = checkbox ? checkbox.checked : true;
+    }
+
+    // 画笔预览切换
+    function updateBrushPreview() {
+      const checkbox = document.getElementById('brushPreview');
+      brushPreviewEnabled = checkbox ? checkbox.checked : true;
+      if (brushPreviewCircle) {
+        brushPreviewCircle.visible(brushPreviewEnabled && (currentTool === 'draw' || currentTool === 'eraser'));
+        if (previewLayer) {
+          previewLayer.draw();
+        }
+      }
+    }
+
+    // 历史记录功能（撤销/重做）
+    function saveHistory() {
+      if (!stage) return;
+
+      // 移除当前索引之后的历史记录
+      history = history.slice(0, historyIndex + 1);
+
+      // 保存当前画布状态
+      try {
+        const dataURL = stage.toDataURL();
+        history.push(dataURL);
+        historyIndex = history.length - 1;
+
+        // 限制历史记录数量
+        if (history.length > 50) {
+          history.shift();
+          historyIndex--;
+        }
+      } catch (e) {
+        console.warn('保存历史记录失败:', e);
+      }
+    }
+
+    function undo() {
+      if (historyIndex > 0) {
+        historyIndex--;
+        restoreFromHistory();
+        showToast('已撤销');
+      } else {
+        showToast('无法撤销');
+      }
+    }
+
+    function redo() {
+      if (historyIndex < history.length - 1) {
+        historyIndex++;
+        restoreFromHistory();
+        showToast('已重做');
+      } else {
+        showToast('无法重做');
+      }
+    }
+
+    function restoreFromHistory() {
+      if (!stage || historyIndex < 0 || historyIndex >= history.length) return;
+
+      const dataURL = history[historyIndex];
+      const img = new Image();
+      img.onload = function () {
+        // 清空绘制层和贴纸层
+        if (drawingLayer) {
+          drawingLayer.destroyChildren();
+        }
+        if (stickerLayer) {
+          stickerLayer.destroyChildren();
+        }
+
+        // 重新绘制背景
+        if (canvasBackground === 'white') {
+          drawGridBackground();
+        } else if (canvasBackground) {
+          setCanvasBackground(canvasBackground, null);
+        }
+
+        // 绘制历史图像
+        const historyImage = new Konva.Image({
+          image: img,
+          listening: false
+        });
+        if (drawingLayer) {
+          drawingLayer.add(historyImage);
+          drawingLayer.draw();
+        }
+      };
+      img.src = dataURL;
+    }
+
+    // 暴露函数到全局
+    window.openDesignWorkshop = openDesignWorkshop;
+    window.setTool = setTool;
+    window.updateBrushSize = updateBrushSize;
+    window.updateBrushColor = updateBrushColor;
+    window.setColor = setColor;
+    window.updateStickerSize = updateStickerSize;
+    window.addSticker = addSticker;
+    window.setCanvasBackground = setCanvasBackground;
+    window.clearCanvas = clearCanvas;
+    window.saveDesign = saveDesign;
+    window.openImageModal = openImageModal;
+    window.closeImageModal = closeImageModal;
+    window.zoomIn = zoomIn;
+    window.zoomOut = zoomOut;
+    window.resetZoom = resetZoom;
+    window.setZoom = setZoom;
+    window.updateSmoothDrawing = updateSmoothDrawing;
+    window.updateBrushPreview = updateBrushPreview;
+    window.undo = undo;
+    window.redo = redo;
+  </script>
+  <script src="app.js"></script>
+  <script src="auth.js"></script>
+</body>
+
+</html>

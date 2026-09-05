@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>IP形象 - 贝漾涌起</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <div class="brand-mark">贝</div>
+      <h1 class="brand-title">贝漾涌起</h1>
+    </div>
+    <nav class="nav" aria-label="主导航">
+      <a href="index.html" class="pill">首页</a>
+      <a href="process.html" class="pill">制作流程</a>
+      <a href="ip.html" class="pill active">IP形象</a>
+      <a href="products.html" class="pill">周边产品</a>
+      <a href="云工坊.html" class="pill">云工坊</a>
+    </nav>
+    <div class="header-actions">
+      <a href="products.html" class="cart-button">
+        <span class="cart-icon">🛒</span>
+        <span class="cart-label">购物车</span>
+      </a>
+      <button id="hamburgerBtn" class="hamburger-btn" type="button" aria-label="打开导航菜单" aria-expanded="false" aria-controls="mobileDrawer">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 移动端侧滑抽屉导航 -->
+  <div id="drawerBackdrop" class="drawer-backdrop" aria-hidden="true"></div>
+  <aside id="mobileDrawer" class="mobile-drawer" role="dialog" aria-modal="true" aria-label="移动端主导航" aria-hidden="true">
+    <div class="drawer-header">
+      <div class="drawer-user-card" id="drawerUserCard">
+        <div class="drawer-avatar">🐚</div>
+        <div class="drawer-user-info">
+          <div class="drawer-user-name" id="drawerUserName">欢迎来到贝漾涌起</div>
+          <button class="drawer-auth-btn" id="drawerAuthBtn" type="button">点击登录 / 注册</button>
+        </div>
+      </div>
+      <button id="drawerClose" class="drawer-close-btn" type="button" aria-label="关闭导航菜单">✕</button>
+    </div>
+    <nav class="drawer-nav">
+      <a href="index.html" class="drawer-link"><span class="drawer-icon">🏠</span> 首页</a>
+      <a href="process.html" class="drawer-link"><span class="drawer-icon">📜</span> 制作流程</a>
+      <a href="ip.html" class="drawer-link active"><span class="drawer-icon">🐚</span> IP形象 · 贝贝</a>
+      <a href="products.html" class="drawer-link"><span class="drawer-icon">🛍️</span> 周边产品</a>
+      <a href="云工坊.html" class="drawer-link"><span class="drawer-icon">🎨</span> 贝雕云工坊</a>
+    </nav>
+    <div class="drawer-footer">
+      <p>🐚 传承千年贝雕技艺 · 弘扬海洋文化</p>
+    </div>
+  </aside>
+
+  <main class="container">
+    <!-- IP形象标题部分 -->
+    <section class="ip-title-section">
+      <h2 class="ip-main-title">IP形象 - 贝贝</h2>
+      <p class="ip-intro-text">贝贝是我们贝雕文化的形象大使，代表着海洋的智慧和艺术的灵性。</p>
+    </section>
+
+    <!-- 主要内容区域：左侧图片 + 右侧内容 -->
+    <section class="ip-main-content">
+      <div class="ip-image-container">
+        <div class="ip-character-box">
+          <img src="https://xiaxizuishuai.github.io/img/shellcarvingimages/media_029.jpg" alt="贝贝" class="ip-character-img">
+          <a href="3d.html" class="ip-3d-button">
+            <span class="button-icon">🎮</span>
+            <span class="button-text">与贝贝3D互动</span>
+          </a>
+        </div>
+      </div>
+      <div class="ip-content-right">
+        <div class="ip-story-section">
+          <h3 class="ip-content-title">贝贝的故事</h3>
+          <p class="ip-content-text">贝贝诞生于南海之滨，由一枚拥有千年历史的珍珠贝孕育而生。它继承了海洋的智慧和贝壳的坚韧，肩负着传播贝雕文化的使命。</p>
+        </div>
+        <div class="ip-appearance-section">
+          <h3 class="ip-content-title">形象特征</h3>
+          <p class="ip-content-text">贝贝的设计融合了贝壳的纹理和海洋生物的特征，拥有珍珠般闪亮的眼睛和贝壳纹理的身体，色彩以海洋蓝和珍珠白为主。</p>
+        </div>
+        <div class="ip-personality-section">
+          <h3 class="ip-content-title">性格特点</h3>
+          <div class="personality-traits">
+            <div class="trait-card">充满好奇心</div>
+            <div class="trait-card">富有创造力</div>
+            <div class="trait-card">坚韧不拔</div>
+            <div class="trait-card">热爱艺术</div>
+            <div class="trait-card">守护传统</div>
+          </div>
+        </div>
+        <button class="read-story-btn">📖 阅读贝贝的完整故事</button>
+      </div>
+    </section>
+
+    <!-- 视频部分 -->
+    <section class="ip-video-section">
+      <video class="ip-character-video" controls autoplay muted loop playsinline>
+        <source src="https://xiaxizuishuai.github.io/img/shellcarvingimages/media_009.mp4" type="video/mp4">
+        您的浏览器不支持视频播放。
+      </video>
+    </section>
+
+    <!-- 贝贝的朋友们部分 -->
+    <section class="ip-friends">
+      <h3 class="section-title">贝贝的朋友们</h3>
+      <p class="friends-description">在贝贝的冒险旅程中，它结识了许多海洋朋友，共同守护海洋文化和传统工艺。</p>
+      <div class="friends-grid">
+        <div class="friend-card qianqian">
+          <img src="https://xiaxizuishuai.github.io/img/shellcarvingimages/media_038.jpg" alt="钳钳" class="friend-img">
+          <h4 class="friend-name">钳钳</h4>
+          <p class="friend-desc">勇敢的小螃蟹，贝贝的忠实伙伴</p>
+        </div>
+        <div class="friend-card paopao">
+          <img src="https://xiaxizuishuai.github.io/img/shellcarvingimages/media_014.jpg" alt="泡泡" class="friend-img">
+          <h4 class="friend-name">泡泡</h4>
+          <p class="friend-desc">活泼的小丑鱼，团队的气氛担当</p>
+        </div>
+        <div class="friend-card rourou">
+          <img src="https://xiaxizuishuai.github.io/img/shellcarvingimages/media_013.jpg" alt="柔柔" class="friend-img">
+          <h4 class="friend-name">柔柔</h4>
+          <p class="friend-desc">温柔的水母，团队的智慧担当</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>© <span id="year">2023</span> 贝漾涌起 | 传承千年贝雕技艺，弘扬海洋文化</p>
+    <p>联系我们: contact@sheli-art.com | 关注微信公众号: 贝雕艺术</p>
+  </footer>
+
+  <script src="app.js"></script>
+  <script src="auth.js"></script>
+</body>
+</html>
+

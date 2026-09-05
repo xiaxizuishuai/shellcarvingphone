@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>贝雕云工坊 - 在线非遗体验</title>
+    <style>
+        /* 全局重置与字体 */
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+            background-color: #eef2f5;
+        }
+
+        /* 顶部标题栏 */
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            box-sizing: border-box;
+            z-index: 10;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .brand {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand span {
+            color: #3498db;
+        }
+
+        .actions button {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .actions button:hover {
+            background: #34495e;
+            transform: translateY(-1px);
+        }
+
+        .actions button.save-btn {
+            background: linear-gradient(135deg, #3498db, #8e44ad);
+        }
+
+        /* 左侧工具栏 */
+        #toolbar {
+            position: absolute;
+            top: 80px;
+            left: 20px;
+            width: 260px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+
+        .tool-group {
+            margin-bottom: 20px;
+        }
+
+        .group-title {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* 模式切换按钮 */
+        .mode-switch {
+            display: flex;
+            background: #ecf0f1;
+            border-radius: 8px;
+            padding: 4px;
+            margin-bottom: 15px;
+        }
+
+        .mode-btn {
+            flex: 1;
+            border: none;
+            background: transparent;
+            padding: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #7f8c8d;
+            transition: 0.2s;
+        }
+
+        .mode-btn.active {
+            background: white;
+            color: #2c3e50;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            font-weight: bold;
+        }
+
+        /* 工具网格 */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .tool-btn {
+            border: 2px solid #ecf0f1;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .tool-btn:hover {
+            border-color: #bdc3c7;
+        }
+
+        .tool-btn.active {
+            border-color: #3498db;
+            background: #ebf5fb;
+            color: #3498db;
+        }
+
+        .tool-icon {
+            font-size: 20px;
+        }
+
+        .tool-name {
+            font-size: 12px;
+        }
+
+        /* 滑块样式 */
+        .slider-container {
+            margin-top: 10px;
+        }
+
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        input[type=range] {
+            width: 100%;
+            cursor: pointer;
+            accent-color: #3498db;
+        }
+
+        input[type=color] {
+            width: 100%;
+            height: 36px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        /* 底部贝壳选择器 */
+        #shell-selector {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 10;
+        }
+
+        .shell-option {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            transition: 0.3s;
+            opacity: 0.8;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .shell-option:hover {
+            transform: translateY(-5px);
+            opacity: 1;
+        }
+
+        .shell-option.active {
+            border-color: #3498db;
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+        /* 加载动画 */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: white;
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: opacity 0.5s;
+        }
+
+        .spinner {
+            font-size: 40px;
+            animation: spin 2s infinite linear;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 20;
+        }
+
+        /* 鼠标样式 */
+        body {
+            cursor: default;
+        }
+
+        .drawing-cursor {
+            cursor: crosshair;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(44, 62, 80, 0.08);
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .back-link:hover {
+            background: rgba(44, 62, 80, 0.15);
+        }
+
+        .mobile-toggle-btn {
+            display: none;
+        }
+
+        .mobile-hint {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                height: 52px;
+                padding: 0 12px;
+            }
+
+            .brand {
+                font-size: 15px;
+                gap: 6px;
+            }
+
+            .actions {
+                display: flex;
+                gap: 5px;
+            }
+
+            .actions button {
+                padding: 6px 9px;
+                font-size: 12px;
+                border-radius: 14px;
+            }
+
+            .mobile-toggle-btn {
+                display: inline-flex !important;
+                background: #3498db !important;
+                color: #fff !important;
+            }
+
+            #toolbar {
+                top: auto;
+                bottom: 78px;
+                left: 10px;
+                right: 10px;
+                width: auto;
+                max-height: 55vh;
+                overflow-y: auto;
+                padding: 14px;
+                border-radius: 16px;
+                transform: translateY(130%);
+                transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+                box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.18);
+            }
+
+            #toolbar.mobile-open {
+                transform: translateY(0);
+            }
+
+            #shell-selector {
+                bottom: 14px;
+                gap: 10px;
+            }
+
+            .shell-option {
+                width: 44px;
+                height: 44px;
+                font-size: 18px;
+            }
+
+            .mobile-hint {
+                display: block;
+                position: absolute;
+                top: 60px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(44, 62, 80, 0.7);
+                color: #ffffff;
+                padding: 4px 12px;
+                border-radius: 20px;
+                font-size: 11px;
+                pointer-events: none;
+                z-index: 5;
+                backdrop-filter: blur(4px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 顶部导航 -->
+    <header>
+        <div class="brand">
+            <a href="index.html" class="back-link" title="返回首页">‹</a>
+            🐚 贝雕<span>云工坊</span>
+        </div>
+        <div class="actions">
+            <button class="mobile-toggle-btn" id="toolbarToggleBtn" onclick="toggleMobileToolbar()">🛠️ 工具箱</button>
+            <button onclick="resetCanvas()">🔄 重置</button>
+            <button class="save-btn" onclick="exportImage()">📸 保存</button>
+        </div>
+    </header>
+
+    <div class="mobile-hint">👆 单指触控绘制 · 3D视图模式可在空白处旋转</div>
+
+    <!-- 左侧工具箱 -->
+    <div id="toolbar">
+        <div class="tool-group">
+            <div class="group-title">创作模式</div>
+            <div class="mode-switch">
+                <button class="mode-btn active" onclick="setMode('carve')" id="btn-carve">雕刻 (造型)</button>
+                <button class="mode-btn" onclick="setMode('paint')" id="btn-paint">彩绘 (上色)</button>
+            </div>
+        </div>
+
+        <!-- 雕刻工具面板 -->
+        <div id="panel-carve" class="tool-group">
+            <div class="group-title">雕刻工具</div>
+            <div class="tools-grid">
+                <div class="tool-btn active" onclick="setTool('sub_sharp')">
+                    <span class="tool-icon">🖋️</span>
+                    <span class="tool-name">尖刀 (V形)</span>
+                </div>
+                <div class="tool-btn" onclick="setTool('sub_round')">
+                    <span class="tool-icon">🥄</span>
+                    <span class="tool-name">圆刀 (U形)</span>
+                </div>
+                <div class="tool-btn" onclick="setTool('sub_flat')">
+                    <span class="tool-icon">⬛</span>
+                    <span class="tool-name">平刀 (方块)</span>
+                </div>
+                <div class="tool-btn" onclick="setTool('add_round')">
+                    <span class="tool-icon">💧</span>
+                    <span class="tool-name">堆塑 (阳刻)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 彩绘工具面板 -->
+        <div id="panel-paint" class="tool-group" style="display: none;">
+            <div class="group-title">画笔设置</div>
+            <div style="margin-bottom: 10px;">
+                <input type="color" id="colorPicker" value="#ff6b6b">
+            </div>
+            <div class="tools-grid">
+                <div class="tool-btn active" onclick="setTool('paint_brush')">
+                    <span class="tool-icon">🖌️</span>
+                    <span class="tool-name">细豪</span>
+                </div>
+                <div class="tool-btn" onclick="setTool('paint_spray')">
+                    <span class="tool-icon">💨</span>
+                    <span class="tool-name">喷枪</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-group">
+            <div class="group-title">笔触控制</div>
+            <div class="slider-container">
+                <div class="slider-label"><span>大小</span> <span id="size-val">20</span></div>
+                <input type="range" min="2" max="60" value="20" oninput="updateSize(this.value)">
+            </div>
+            <div class="slider-container">
+                <div class="slider-label"><span>力度</span> <span id="strength-val">80%</span></div>
+                <input type="range" min="10" max="100" value="80" oninput="updateStrength(this.value)">
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部贝壳选择 -->
+    <div id="shell-selector">
+        <div class="shell-option active" onclick="changeShell(0)" title="扇贝 (Scallop)">🐚</div>
+        <div class="shell-option" onclick="changeShell(1)" title="椭圆贝 (Oval)">🥚</div>
+        <div class="shell-option" onclick="changeShell(2)" title="螺旋贝 (Spiral)">🌀</div>
+    </div>
+
+    <!-- 提示框 -->
+    <div id="toast" class="toast">作品已保存</div>
+
+    <!-- 加载层 -->
+    <div id="loader">
+        <div class="spinner">🌊</div>
+        <p style="color:#7f8c8d; margin-top:10px;">正在打造工坊环境...</p>
+    </div>
+
+    <!-- 配置 Import Map -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <!-- Three.js 核心逻辑 -->
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+        // --- 全局变量声明区 ---
+        // 关键修复：将这些变量移到顶部，防止 animate() 运行时它们未定义
+        let needsUpdateDisp = false;
+        let needsUpdateColor = false;
+
+        let scene, camera, renderer, controls;
+        let currentMesh;
+        let raycaster = new THREE.Raycaster();
+        let mouse = new THREE.Vector2();
+        let isDrawing = false;
+        let lastUV = null;
+
+        const TEX_SIZE = 1024;
+        let canvasDisp, ctxDisp;
+        let canvasColor, ctxColor;
+        let texDisp, texColor;
+
+        const state = {
+            mode: 'carve',
+            tool: 'sub_sharp',
+            size: 20,
+            strength: 0.8,
+            color: '#ff6b6b'
+        };
+
+        const geometries = [];
+
+        // 初始化
+        init();
+
+        function init() {
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0xeef2f5);
+            scene.fog = new THREE.Fog(0xeef2f5, 10, 50);
+
+            camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+            camera.position.set(0, 8, 6);
+
+            renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            document.body.appendChild(renderer.domElement);
+
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+
+            const mainLight = new THREE.DirectionalLight(0xffffff, 1.2);
+            mainLight.position.set(5, 10, 5);
+            mainLight.castShadow = true;
+            mainLight.shadow.mapSize.width = 2048;
+            mainLight.shadow.mapSize.height = 2048;
+            mainLight.shadow.bias = -0.0001;
+            scene.add(mainLight);
+
+            const rimLight = new THREE.SpotLight(0x3498db, 0.8);
+            rimLight.position.set(-5, 2, -5);
+            rimLight.lookAt(0, 0, 0);
+            scene.add(rimLight);
+
+            initCanvases();
+            initShellGeometries();
+            loadShell(0);
+
+            controls = new OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            controls.minDistance = 3;
+            controls.maxDistance = 15;
+
+            window.addEventListener('resize', onWindowResize);
+            renderer.domElement.addEventListener('pointerdown', onPointerDown);
+            renderer.domElement.addEventListener('pointermove', onPointerMove);
+            window.addEventListener('pointerup', onPointerUp);
+
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = 0;
+                setTimeout(() => document.getElementById('loader').style.display = 'none', 500);
+            }, 800);
+
+            // 在所有变量初始化完成后启动动画循环
+            animate();
+        }
+
+        function initCanvases() {
+            canvasDisp = document.createElement('canvas');
+            canvasDisp.width = TEX_SIZE;
+            canvasDisp.height = TEX_SIZE;
+            ctxDisp = canvasDisp.getContext('2d');
+            ctxDisp.fillStyle = 'rgb(128, 128, 128)';
+            ctxDisp.fillRect(0, 0, TEX_SIZE, TEX_SIZE);
+
+            canvasColor = document.createElement('canvas');
+            canvasColor.width = TEX_SIZE;
+            canvasColor.height = TEX_SIZE;
+            ctxColor = canvasColor.getContext('2d');
+            ctxColor.fillStyle = '#FFFFFF';
+            ctxColor.fillRect(0, 0, TEX_SIZE, TEX_SIZE);
+            addNoise(ctxColor);
+
+            texDisp = new THREE.CanvasTexture(canvasDisp);
+            texColor = new THREE.CanvasTexture(canvasColor);
+        }
+
+        function addNoise(ctx) {
+            const w = ctx.canvas.width;
+            const h = ctx.canvas.height;
+            const idata = ctx.getImageData(0, 0, w, h);
+            const buffer32 = new Uint32Array(idata.data.buffer);
+            for (let i = 0; i < buffer32.length; i++) {
+                if (Math.random() < 0.1) {
+                    buffer32[i] = 0xfff0f0f0;
+                }
+            }
+            ctx.putImageData(idata, 0, 0);
+        }
+
+        function initShellGeometries() {
+            // 1. 扇贝
+            const geo1 = new THREE.SphereGeometry(2, 256, 128, 0, Math.PI * 2, 0, Math.PI / 2);
+            geo1.scale(1, 0.25, 1);
+            const pos1 = geo1.attributes.position;
+            const tempVec = new THREE.Vector3();
+            for (let i = 0; i < pos1.count; i++) {
+                tempVec.fromBufferAttribute(pos1, i);
+                const radius = Math.sqrt(tempVec.x * tempVec.x + tempVec.z * tempVec.z);
+                const angle = Math.atan2(tempVec.z, tempVec.x);
+                const ribFrequency = 12;
+                const ribStrength = 0.15;
+                const wave = Math.cos(angle * ribFrequency) * radius * ribStrength;
+                pos1.setY(i, tempVec.y + wave);
+            }
+            geo1.computeVertexNormals();
+            geometries.push(geo1);
+
+            // 2. 椭圆贝
+            const geo2 = new THREE.SphereGeometry(1.8, 128, 128, 0, Math.PI * 2, 0, Math.PI / 2);
+            geo2.scale(1, 0.6, 1.4);
+            const pos2 = geo2.attributes.position;
+            for (let i = 0; i < pos2.count; i++) {
+                const x = pos2.getX(i);
+                if (x > 0) pos2.setY(i, pos2.getY(i) * 1.1);
+            }
+            geo2.computeVertexNormals();
+            geometries.push(geo2);
+
+            // 3. 螺旋贝 (Lathe 模拟)
+            const points = [];
+            for (let i = 0; i < 20; i++) {
+                const t = i / 20;
+                const r = (1 - t) * 1.5 + Math.sin(t * Math.PI * 8) * 0.1;
+                const y = t * 3.5 - 1.5;
+                points.push(new THREE.Vector2(r, y));
+            }
+            points.push(new THREE.Vector2(0, 2));
+            const geo3 = new THREE.LatheGeometry(points, 64);
+            geometries.push(geo3);
+        }
+
+        function loadShell(index) {
+            if (currentMesh) {
+                scene.remove(currentMesh);
+                resetCanvas(true);
+            }
+
+            const geometry = geometries[index];
+
+            const material = new THREE.MeshStandardMaterial({
+                map: texColor,
+                displacementMap: texDisp,
+                displacementScale: 0.5,
+                color: 0xffffff,
+                roughness: 0.35,
+                metalness: 0.05,
+                side: THREE.DoubleSide
+            });
+
+            currentMesh = new THREE.Mesh(geometry, material);
+            currentMesh.castShadow = true;
+            currentMesh.receiveShadow = true;
+
+            geometry.computeBoundingBox();
+            const center = new THREE.Vector3();
+            geometry.boundingBox.getCenter(center);
+            currentMesh.position.sub(center);
+
+            if (index === 2) currentMesh.rotation.x = 0;
+            else currentMesh.rotation.x = Math.PI / 6;
+
+            scene.add(currentMesh);
+        }
+
+        function paint(uv) {
+            const x = uv.x * TEX_SIZE;
+            const y = uv.y * TEX_SIZE;
+
+            const size = state.size;
+            const strength = state.strength; // 0-1
+
+            if (state.mode === 'carve') {
+                ctxDisp.beginPath();
+
+                if (state.tool === 'sub_flat') {
+                    ctxDisp.rect(x - size / 2, y - size / 2, size, size);
+                } else {
+                    ctxDisp.arc(x, y, size, 0, Math.PI * 2);
+                }
+
+                let grad;
+                if (state.tool === 'sub_flat') {
+                    const val = Math.max(20, 128 - strength * 150);
+                    ctxDisp.fillStyle = `rgb(${val},${val},${val})`;
+                } else {
+                    grad = ctxDisp.createRadialGradient(x, y, 0, x, y, size);
+
+                    if (state.tool === 'sub_sharp') {
+                        const val = Math.max(0, 128 - strength * 255);
+                        grad.addColorStop(0, `rgb(${val},${val},${val})`);
+                        grad.addColorStop(0.3, `rgb(${val + 50},${val + 50},${val + 50})`);
+                        grad.addColorStop(1, `rgba(128,128,128,0)`);
+                    } else if (state.tool === 'sub_round') {
+                        const val = Math.max(30, 128 - strength * 150);
+                        grad.addColorStop(0, `rgb(${val},${val},${val})`);
+                        grad.addColorStop(1, `rgba(128,128,128,0)`);
+                    } else if (state.tool === 'add_round') {
+                        const val = Math.min(255, 128 + strength * 150);
+                        grad.addColorStop(0, `rgb(${val},${val},${val})`);
+                        grad.addColorStop(1, `rgba(128,128,128,0)`);
+                    }
+                    ctxDisp.fillStyle = grad;
+                }
+
+                ctxDisp.fill();
+                requestTextureUpdate('disp');
+
+            } else {
+                ctxColor.beginPath();
+                if (state.tool === 'paint_brush') {
+                    ctxColor.arc(x, y, size * 0.5, 0, Math.PI * 2);
+                    ctxColor.fillStyle = state.color;
+                    ctxColor.fill();
+                } else if (state.tool === 'paint_spray') {
+                    const grad = ctxColor.createRadialGradient(x, y, 0, x, y, size * 2);
+                    grad.addColorStop(0, hexToRgba(state.color, strength * 0.5));
+                    grad.addColorStop(1, hexToRgba(state.color, 0));
+                    ctxColor.fillStyle = grad;
+                    ctxColor.arc(x, y, size * 2, 0, Math.PI * 2);
+                    ctxColor.fill();
+                }
+                requestTextureUpdate('color');
+            }
+        }
+
+        function drawStroke(startUV, endUV) {
+            const dX = endUV.x - startUV.x;
+            const dY = endUV.y - startUV.y;
+            const dist = Math.sqrt(dX * dX + dY * dY);
+
+            if (dist > 0.1) {
+                paint(endUV);
+                return;
+            }
+
+            const uvBrushSize = state.size / TEX_SIZE;
+            const stepSize = Math.max(0.0005, uvBrushSize / 4);
+
+            const steps = Math.ceil(dist / stepSize);
+
+            for (let i = 1; i <= steps; i++) {
+                const t = i / steps;
+                const u = startUV.x + dX * t;
+                const v = startUV.y + dY * t;
+                paint({ x: u, y: v });
+            }
+        }
+
+        function requestTextureUpdate(type) {
+            if (type === 'disp') needsUpdateDisp = true;
+            if (type === 'color') needsUpdateColor = true;
+        }
+
+        function hexToRgba(hex, alpha) {
+            const r = parseInt(hex.slice(1, 3), 16);
+            const g = parseInt(hex.slice(3, 5), 16);
+            const b = parseInt(hex.slice(5, 7), 16);
+            return `rgba(${r},${g},${b},${alpha})`;
+        }
+
+        // --- 交互事件 ---
+        function onPointerDown(e) {
+            if (e.button !== 0) return;
+
+            const rect = renderer.domElement.getBoundingClientRect();
+            mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+            mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObject(currentMesh);
+
+            if (intersects.length > 0) {
+                isDrawing = true;
+                controls.enabled = false;
+                document.body.classList.add('drawing-cursor');
+
+                lastUV = intersects[0].uv; // 记录起点
+                paint(lastUV); // 绘制第一点
+            } else {
+                isDrawing = false;
+                controls.enabled = true;
+                document.body.classList.remove('drawing-cursor');
+                lastUV = null;
+            }
+        }
+
+        function onPointerMove(e) {
+            if (isDrawing) {
+                const rect = renderer.domElement.getBoundingClientRect();
+                mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+                mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+                raycaster.setFromCamera(mouse, camera);
+                const intersects = raycaster.intersectObject(currentMesh);
+
+                if (intersects.length > 0) {
+                    const currentUV = intersects[0].uv;
+                    if (lastUV) {
+                        drawStroke(lastUV, currentUV); // 插值绘制
+                    } else {
+                        paint(currentUV);
+                    }
+                    lastUV = currentUV; // 更新上一点
+                } else {
+                    lastUV = null; // 移出贝壳重置
+                }
+            }
+        }
+
+        function onPointerUp() {
+            isDrawing = false;
+            controls.enabled = true;
+            document.body.classList.remove('drawing-cursor');
+            lastUV = null;
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+
+            // 集中更新纹理，避免在 paint 循环中频繁调用
+            if (needsUpdateDisp) {
+                texDisp.needsUpdate = true;
+                needsUpdateDisp = false;
+            }
+            if (needsUpdateColor) {
+                texColor.needsUpdate = true;
+                needsUpdateColor = false;
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        // --- UI 接口 ---
+        window.setMode = (mode) => {
+            state.mode = mode;
+            document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(`btn-${mode}`).classList.add('active');
+            document.getElementById('panel-carve').style.display = mode === 'carve' ? 'block' : 'none';
+            document.getElementById('panel-paint').style.display = mode === 'paint' ? 'block' : 'none';
+        };
+
+        window.setTool = (toolName) => {
+            state.tool = toolName;
+            document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+        };
+
+        window.updateSize = (val) => {
+            state.size = parseInt(val);
+            document.getElementById('size-val').innerText = val;
+        };
+
+        window.updateStrength = (val) => {
+            state.strength = parseInt(val) / 100;
+            document.getElementById('strength-val').innerText = val + '%';
+        };
+
+        document.getElementById('colorPicker').addEventListener('input', (e) => {
+            state.color = e.target.value;
+        });
+
+        window.changeShell = (index) => {
+            loadShell(index);
+            document.querySelectorAll('.shell-option').forEach((el, i) => {
+                if (i === index) el.classList.add('active');
+                else el.classList.remove('active');
+            });
+        };
+
+        window.resetCanvas = (clearAll = true) => {
+            ctxDisp.fillStyle = 'rgb(128, 128, 128)';
+            ctxDisp.fillRect(0, 0, TEX_SIZE, TEX_SIZE);
+            needsUpdateDisp = true;
+            if (clearAll) {
+                ctxColor.fillStyle = '#FFFFFF';
+                ctxColor.fillRect(0, 0, TEX_SIZE, TEX_SIZE);
+                addNoise(ctxColor);
+                needsUpdateColor = true;
+            }
+            showToast('画布已重置');
+        };
+
+        window.exportImage = () => {
+            renderer.render(scene, camera);
+            const dataURL = renderer.domElement.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.download = '我的贝雕作品.png';
+            link.href = dataURL;
+            link.click();
+            showToast('作品已下载！');
+        };
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.innerText = msg;
+            t.style.opacity = 1;
+            t.style.top = '100px';
+            setTimeout(() => {
+                t.style.opacity = 0;
+                t.style.top = '80px';
+            }, 2000);
+        function toggleMobileToolbar() {
+            const tb = document.getElementById('toolbar');
+            const btn = document.getElementById('toolbarToggleBtn');
+            if (tb) {
+                const isOpen = tb.classList.toggle('mobile-open');
+                if (btn) {
+                    btn.textContent = isOpen ? '✕ 关闭工具' : '🛠️ 工具箱';
+                }
+            }
+        }
+        window.toggleMobileToolbar = toggleMobileToolbar;
+    </script>
+</body>
+
+</html>

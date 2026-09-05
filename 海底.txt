@@ -1,0 +1,450 @@
+import React, { useMemo } from 'react';
+
+const UnderwaterWorld = () => {
+  // Generate random bubbles for animation
+  const bubbles = useMemo(() => {
+    return Array.from({ length: 40 }).map((_, i) => ({
+      id: i,
+      cx: Math.random() * 1200,
+      cy: 800 + Math.random() * 200,
+      r: Math.random() * 6 + 2,
+      delay: `${Math.random() * 10}s`,
+      duration: `${10 + Math.random() * 15}s`,
+      opacity: Math.random() * 0.4 + 0.1,
+    }));
+  }, []);
+
+  // Generate fish schools
+  const fishSchool = useMemo(() => {
+    return Array.from({ length: 15 }).map((_, i) => {
+      const isRight = Math.random() > 0.5;
+      return {
+        id: i,
+        y: 200 + Math.random() * 500,
+        delay: `${Math.random() * 20}s`,
+        duration: `${15 + Math.random() * 20}s`,
+        scale: Math.random() * 0.5 + 0.5,
+        type: Math.random() > 0.6 ? 'clownfish' : 'bluefish',
+        direction: isRight ? 1 : -1,
+      };
+    });
+  }, []);
+
+  // Generate seaweed strands
+  const generateSeaweed = (startX, startY, count, scale = 1, color = "#68A67B") => {
+    return Array.from({ length: count }).map((_, i) => {
+      const offsetX = startX + i * 25 * scale;
+      return {
+        id: `sw-${startX}-${i}`,
+        d: `M ${offsetX} ${startY} Q ${offsetX + 15} ${startY - 50 * scale} ${offsetX} ${startY - 100 * scale} T ${offsetX} ${startY - 200 * scale} T ${offsetX} ${startY - 300 * scale} T ${offsetX + 10} ${startY - 400 * scale}`,
+        color: color,
+        delay: `${Math.random() * -5}s`,
+        scale: scale
+      };
+    });
+  };
+
+  const kelpForestLeft = generateSeaweed(50, 750, 4, 1.2, "#4D8C65");
+  const kelpForestRight = generateSeaweed(1050, 850, 3, 1, "#60A58B");
+  const smallKelpCenter = generateSeaweed(350, 650, 3, 0.5, "#88C59B");
+
+  return (
+    <div className="relative w-full h-screen overflow-hidden bg-[#9ad9e4] font-sans selection:bg-pink-300">
+      {/* Title Overlay */}
+      <div className="absolute top-8 left-12 z-10 pointer-events-none">
+        <h1 className="text-4xl md:text-6xl font-serif text-[#3a6e7c] opacity-80 mix-blend-color-burn" style={{ textShadow: '2px 2px 4px rgba(255,255,255,0.5)' }}>
+          Coral Haven
+        </h1>
+        <p className="text-xl text-[#4a8b9e] font-light mt-2 opacity-75">A Digital Seashell Exhibition</p>
+      </div>
+
+      <svg
+        viewBox="0 0 1200 800"
+        className="w-full h-full object-cover origin-center"
+        preserveAspectRatio="xMidYMid slice"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          {/* CSS Animations embedded in SVG */}
+          <style>
+            {`
+              .sway {
+                transform-box: fill-box;
+                transform-origin: bottom center;
+                animation: sway-anim 6s ease-in-out infinite alternate;
+              }
+              .sway-reverse {
+                transform-box: fill-box;
+                transform-origin: bottom center;
+                animation: sway-anim-rev 7s ease-in-out infinite alternate;
+              }
+              @keyframes sway-anim {
+                0% { transform: rotate(-3deg); }
+                100% { transform: rotate(4deg); }
+              }
+              @keyframes sway-anim-rev {
+                0% { transform: rotate(4deg); }
+                100% { transform: rotate(-3deg); }
+              }
+              .float {
+                animation: float-anim 8s ease-in-out infinite alternate;
+              }
+              .float-slow {
+                animation: float-anim 12s ease-in-out infinite alternate;
+              }
+              @keyframes float-anim {
+                0% { transform: translateY(0px); }
+                100% { transform: translateY(-30px); }
+              }
+              .rise {
+                animation: rise-anim linear infinite;
+              }
+              @keyframes rise-anim {
+                0% { transform: translateY(0) scale(0.8); opacity: 0; }
+                10% { opacity: 0.6; }
+                90% { opacity: 0.4; }
+                100% { transform: translateY(-900px) scale(1.2); opacity: 0; }
+              }
+              .swim-right {
+                animation: swim-right-anim linear infinite;
+              }
+              .swim-left {
+                animation: swim-left-anim linear infinite;
+              }
+              @keyframes swim-right-anim {
+                0% { transform: translateX(-100px); }
+                100% { transform: translateX(1300px); }
+              }
+              @keyframes swim-left-anim {
+                0% { transform: translateX(1300px); }
+                100% { transform: translateX(-100px); }
+              }
+              .pulse {
+                animation: pulse-anim 4s ease-in-out infinite alternate;
+              }
+              @keyframes pulse-anim {
+                0% { transform: scale(1); }
+                100% { transform: scale(1.03); }
+              }
+            `}
+          </style>
+
+          {/* Gradients */}
+          <linearGradient id="water-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#A8E4ED" />
+            <stop offset="50%" stopColor="#7CCBE2" />
+            <stop offset="100%" stopColor="#53A6C7" />
+          </linearGradient>
+
+          <linearGradient id="sand-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#c8ead3" />
+            <stop offset="100%" stopColor="#a3d6b8" />
+          </linearGradient>
+
+          <linearGradient id="sand-grad-dark" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#A5D6B8" />
+            <stop offset="100%" stopColor="#7FB99A" />
+          </linearGradient>
+
+          <linearGradient id="shell-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#FFFFFF" />
+            <stop offset="50%" stopColor="#F0F5F6" />
+            <stop offset="100%" stopColor="#D5E6E8" />
+          </linearGradient>
+          
+          <linearGradient id="shell-pink-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#FCE7EB" />
+            <stop offset="100%" stopColor="#E3BFC8" />
+          </linearGradient>
+
+          <linearGradient id="pond-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#89D5E2" />
+            <stop offset="100%" stopColor="#64B8CC" />
+          </linearGradient>
+
+          {/* Watercolor Filter Overlay */}
+          <filter id="watercolor-texture" x="-10%" y="-10%" width="120%" height="120%">
+            {/* Create paper texture noise */}
+            <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="5" result="noise" />
+            {/* Soften and color the noise to make it look like watercolor pigment pooling */}
+            <feColorMatrix type="matrix" values="
+              1 0 0 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 0.15 0" in="noise" result="coloredNoise" />
+            <feBlend in="SourceGraphic" in2="coloredNoise" mode="multiply" result="blend1" />
+            {/* Add subtle edge bleed (optional, can be heavy on performance, keeping it simple here) */}
+          </filter>
+
+          <filter id="drop-shadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="8" stdDeviation="6" floodColor="#2a6073" floodOpacity="0.2" />
+          </filter>
+          
+          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="8" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+
+        </defs>
+
+        {/* --- Background --- */}
+        <rect width="1200" height="800" fill="url(#water-bg)" />
+
+        {/* Background Details (Faded jellyfish, distant terrain) */}
+        <g opacity="0.3" className="float-slow">
+          <path d="M 900 200 C 850 200 850 280 900 280 C 950 280 950 200 900 200 Z" fill="#D6B4E7" />
+          <path d="M 870 250 Q 880 300 870 350 M 900 260 Q 910 320 900 380 M 930 250 Q 920 300 930 350" stroke="#D6B4E7" strokeWidth="3" fill="none" className="sway"/>
+        </g>
+        <g opacity="0.2" className="float" style={{ animationDelay: '-4s' }}>
+          <path d="M 300 150 C 270 150 270 200 300 200 C 330 200 330 150 300 150 Z" fill="#B4E7D6" />
+          <path d="M 285 180 Q 290 220 280 250 M 300 190 Q 305 240 300 280 M 315 180 Q 310 220 315 250" stroke="#B4E7D6" strokeWidth="2" fill="none" className="sway-reverse"/>
+        </g>
+
+        {/* --- Back Terrain Layer --- */}
+        <path d="M 0 450 Q 200 400 450 480 T 900 420 T 1200 460 L 1200 800 L 0 800 Z" fill="url(#sand-grad)" opacity="0.8" />
+        
+        {/* --- Mid Terrain Layer & Terraces --- */}
+        <path d="M 0 550 Q 150 500 350 580 T 700 520 T 1000 560 L 1200 520 L 1200 800 L 0 800 Z" fill="url(#sand-grad-dark)" />
+        
+        {/* Ponds in the seabed */}
+        <g filter="url(#drop-shadow)">
+          <path d="M 200 600 C 300 580 400 620 350 680 C 300 740 150 700 120 650 C 90 600 150 610 200 600 Z" fill="url(#pond-grad)" stroke="#92d5c4" strokeWidth="4" />
+          <path d="M 650 650 C 750 620 850 640 820 690 C 780 750 620 730 600 680 C 580 630 600 660 650 650 Z" fill="url(#pond-grad)" stroke="#92d5c4" strokeWidth="4" />
+          <path d="M 350 780 C 450 750 650 780 600 850 C 500 880 300 850 350 780 Z" fill="url(#pond-grad)" stroke="#92d5c4" strokeWidth="4" />
+        </g>
+
+        {/* Terraced Rock/Coral structures (Right Side) */}
+        <g stroke="#6199A0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          {/* Base terrace */}
+          <path d="M 680 500 Q 750 480 880 500 Q 920 520 860 550 Q 750 540 660 550 Q 640 520 680 500 Z" fill="#9CD1D8" />
+          <path d="M 660 550 Q 750 540 860 550 L 850 570 Q 750 560 650 570 Z" fill="#6DAEB7" />
+          {/* Mid terrace */}
+          <path d="M 720 450 Q 780 440 850 450 Q 880 470 820 490 Q 760 480 700 490 Q 680 470 720 450 Z" fill="#A8DCE1" />
+          <path d="M 700 490 Q 760 480 820 490 L 810 510 Q 760 500 690 510 Z" fill="#7CBCC5" />
+          {/* Top terrace */}
+          <path d="M 780 400 Q 820 390 870 410 Q 890 430 840 440 Q 800 430 760 440 Q 750 420 780 400 Z" fill="#BAE5EA" />
+          <path d="M 760 440 Q 800 430 840 440 L 830 460 Q 800 450 750 460 Z" fill="#8AC8D1" />
+        </g>
+
+        {/* --- Background Seaweed --- */}
+        <g strokeLinecap="round" fill="none">
+          {kelpForestLeft.map(sw => (
+            <path key={sw.id} d={sw.d} stroke={sw.color} strokeWidth={8 * sw.scale} className="sway" style={{ animationDelay: sw.delay }} />
+          ))}
+          {smallKelpCenter.map((sw, i) => (
+            <path key={sw.id} d={sw.d} stroke={sw.color} strokeWidth={6 * sw.scale} className={i % 2 === 0 ? "sway" : "sway-reverse"} style={{ animationDelay: sw.delay }} />
+          ))}
+        </g>
+
+        {/* --- Main Structures (Houses) --- */}
+        
+        {/* Left Spiky House */}
+        <g id="left-house" transform="translate(40, 380)" filter="url(#drop-shadow)">
+          {/* Spikes */}
+          <path d="M 60 70 L 40 10 L 80 60 Z" fill="url(#shell-grad)" stroke="#67A1B3" strokeWidth="2" strokeLinejoin="round"/>
+          <path d="M 100 50 L 110 -10 L 130 50 Z" fill="url(#shell-grad)" stroke="#67A1B3" strokeWidth="2" strokeLinejoin="round"/>
+          <path d="M 150 60 L 180 15 L 170 70 Z" fill="url(#shell-grad)" stroke="#67A1B3" strokeWidth="2" strokeLinejoin="round"/>
+          {/* Main Dome */}
+          <path d="M 20 140 C 0 70 80 40 130 40 C 180 40 220 80 200 140 Z" fill="url(#shell-grad)" stroke="#67A1B3" strokeWidth="2" />
+          {/* Door / Windows */}
+          <path d="M 80 140 C 80 100 130 100 130 140 Z" fill="#3D687A" stroke="#2B4956" strokeWidth="2" />
+          <circle cx="160" cy="90" r="10" fill="#E8D1A3" stroke="#67A1B3" strokeWidth="2" />
+          <path d="M 160 80 L 160 100 M 150 90 L 170 90" stroke="#67A1B3" strokeWidth="2" />
+        </g>
+
+        {/* Center Main Arched House */}
+        <g id="main-house" transform="translate(480, 160)" filter="url(#drop-shadow)">
+          {/* Back arches/supports */}
+          <path d="M 180 200 Q 180 100 240 80 Q 280 120 280 200" fill="url(#shell-grad)" stroke="#74AAB3" strokeWidth="2" />
+          
+          {/* Main front arch structure */}
+          <path d="M 30 220 C -10 120 80 50 150 40 C 220 30 260 80 280 150 C 290 200 270 230 260 250 C 250 200 220 150 180 140 C 140 130 100 160 90 220 Z" fill="url(#shell-grad)" stroke="#649DA6" strokeWidth="2" strokeLinejoin="round"/>
+          
+          {/* Roof canopy overlay (the blue/yellow draped cloth) */}
+          <path d="M 120 40 Q 150 20 180 40 Q 190 60 180 80 Q 150 90 120 80 Q 110 60 120 40 Z" fill="#F4DE8D" stroke="#DCAE42" strokeWidth="2" />
+          <path d="M 130 80 Q 150 120 170 80" fill="none" stroke="#DCAE42" strokeWidth="2" />
+          <circle cx="120" cy="80" r="5" fill="#88C0D0" />
+          <circle cx="150" cy="90" r="5" fill="#88C0D0" />
+          <circle cx="180" cy="80" r="5" fill="#88C0D0" />
+          
+          {/* Windows on main arch */}
+          <path d="M 190 100 L 200 85 L 210 100 L 225 110 L 210 120 L 200 135 L 190 120 L 175 110 Z" fill="#F4DE8D" stroke="#DCAE42" strokeWidth="2" />
+          <circle cx="240" cy="140" r="8" fill="#F4DE8D" stroke="#649DA6" strokeWidth="2" />
+          <circle cx="255" cy="160" r="6" fill="#F4DE8D" stroke="#649DA6" strokeWidth="2" />
+          
+          {/* Side extension */}
+          <path d="M 280 180 C 310 160 340 180 340 230 L 290 240 Z" fill="url(#shell-grad)" stroke="#649DA6" strokeWidth="2" />
+          <circle cx="310" cy="200" r="10" fill="#3D687A" stroke="#649DA6" strokeWidth="2" />
+
+          {/* Pearls/Decorations */}
+          <circle cx="120" cy="180" r="8" fill="#FCE7EB" stroke="#DCAE42" strokeWidth="1" />
+          <circle cx="140" cy="190" r="6" fill="#FCE7EB" stroke="#DCAE42" strokeWidth="1" />
+          <circle cx="160" cy="185" r="7" fill="#FCE7EB" stroke="#DCAE42" strokeWidth="1" />
+          
+          {/* Inner platform elements */}
+          <ellipse cx="160" cy="200" rx="40" ry="15" fill="#C5DFE6" stroke="#8FBCC4" strokeWidth="2" />
+          <path d="M 140 195 Q 160 180 180 195" fill="none" stroke="#F3A3AD" strokeWidth="4" strokeLinecap="round" />
+        </g>
+
+        {/* --- Flora / Corals --- */}
+        
+        {/* Coral Group 1 (Left near spiky house) */}
+        <g transform="translate(200, 360)">
+          {/* Brain Coral */}
+          <path d="M 0 100 A 40 40 0 0 1 80 100 Z" fill="#F3A3AD" stroke="#D98892" strokeWidth="2" />
+          <path d="M 10 90 Q 20 70 30 90 T 50 90 T 70 90" fill="none" stroke="#D98892" strokeWidth="2" strokeLinecap="round"/>
+          <path d="M 20 80 Q 30 60 40 80 T 60 80" fill="none" stroke="#D98892" strokeWidth="2" strokeLinecap="round"/>
+          {/* Tube Coral */}
+          <rect x="80" y="60" width="15" height="40" rx="7" fill="#9CD1D8" stroke="#71AAB4" strokeWidth="2" />
+          <rect x="95" y="50" width="12" height="50" rx="6" fill="#9CD1D8" stroke="#71AAB4" strokeWidth="2" />
+          <rect x="110" y="70" width="14" height="30" rx="7" fill="#9CD1D8" stroke="#71AAB4" strokeWidth="2" />
+          <ellipse cx="87.5" cy="62" rx="4" ry="2" fill="#F3A3AD" />
+          <ellipse cx="101" cy="52" rx="3" ry="1.5" fill="#F3A3AD" />
+          <ellipse cx="117" cy="72" rx="4" ry="2" fill="#F3A3AD" />
+        </g>
+
+        {/* Tree Coral (Center Left) */}
+        <g transform="translate(320, 480)">
+          <path d="M 30 100 Q 30 60 10 30 M 30 70 Q 50 40 70 20 M 20 50 Q 0 30 -10 10 M 50 50 Q 70 30 80 0 M 30 100 Q 30 50 40 10" 
+                fill="none" stroke="#F09B9B" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
+          <circle cx="10" cy="30" r="4" fill="#FCE7EB" />
+          <circle cx="70" cy="20" r="4" fill="#FCE7EB" />
+          <circle cx="-10" cy="10" r="4" fill="#FCE7EB" />
+          <circle cx="80" cy="0" r="4" fill="#FCE7EB" />
+          <circle cx="40" cy="10" r="4" fill="#FCE7EB" />
+        </g>
+
+        {/* Tiered Plate Corals (Right bottom) */}
+        <g transform="translate(900, 550)" filter="url(#drop-shadow)">
+          <ellipse cx="100" cy="80" rx="70" ry="25" fill="#D6B4E7" stroke="#A683B8" strokeWidth="2" />
+          <path d="M 50 80 Q 100 90 150 80" fill="none" stroke="#A683B8" strokeWidth="1.5" />
+          <ellipse cx="120" cy="50" rx="60" ry="20" fill="#F3A3AD" stroke="#D98892" strokeWidth="2" />
+          <path d="M 80 50 Q 120 60 160 50" fill="none" stroke="#D98892" strokeWidth="1.5" />
+          <ellipse cx="80" cy="20" rx="50" ry="18" fill="#F7D675" stroke="#C9A84D" strokeWidth="2" />
+          <path d="M 40 20 Q 80 30 120 20" fill="none" stroke="#C9A84D" strokeWidth="1.5" />
+          <path d="M 60 -10 A 30 30 0 0 1 120 -10 Z" fill="#9CD1D8" stroke="#71AAB4" strokeWidth="2" />
+        </g>
+
+        {/* Small detail corals / Sponges around the pond */}
+        <g transform="translate(180, 680)">
+          <circle cx="0" cy="0" r="15" fill="#F7D675" stroke="#C9A84D" strokeWidth="2" />
+          <circle cx="-10" cy="15" r="10" fill="#F3A3AD" stroke="#D98892" strokeWidth="2" />
+          <circle cx="15" cy="10" r="12" fill="#D6B4E7" stroke="#A683B8" strokeWidth="2" />
+        </g>
+        
+        <g transform="translate(680, 720)">
+           <path d="M 0 20 Q 10 0 20 20 T 40 20 T 60 20" fill="#F7D675" stroke="#C9A84D" strokeWidth="2" />
+           <path d="M 10 20 Q 10 5 15 5 M 30 20 Q 30 5 35 5 M 50 20 Q 50 10 55 10" fill="none" stroke="#C9A84D" strokeWidth="2" strokeLinecap="round"/>
+        </g>
+
+        {/* --- Foreground Seaweed --- */}
+        <g strokeLinecap="round" fill="none">
+          {kelpForestRight.map((sw, i) => (
+            <path key={sw.id} d={sw.d} stroke={sw.color} strokeWidth={10 * sw.scale} className={i % 2 === 0 ? "sway" : "sway-reverse"} style={{ animationDelay: sw.delay }} />
+          ))}
+        </g>
+
+        {/* --- Fauna --- */}
+
+        {/* Giant Jellyfish (Top Right) */}
+        <g transform="translate(980, 150)" className="float">
+          {/* Tentacles */}
+          <path d="M 30 60 Q 20 120 40 180 T 30 250" fill="none" stroke="#FCE7EB" strokeWidth="3" className="sway" />
+          <path d="M 50 60 Q 60 130 40 190 T 60 260" fill="none" stroke="#D6B4E7" strokeWidth="4" className="sway-reverse" />
+          <path d="M 70 60 Q 80 110 60 170 T 80 240" fill="none" stroke="#FCE7EB" strokeWidth="3" className="sway" />
+          <path d="M 90 60 Q 80 140 100 200 T 90 270" fill="none" stroke="#D6B4E7" strokeWidth="4" className="sway-reverse" />
+          
+          {/* Bell */}
+          <path d="M 0 60 C 0 -20 120 -20 120 60 Z" fill="url(#shell-pink-grad)" opacity="0.85" stroke="#E3BFC8" strokeWidth="2" />
+          <path d="M 0 60 Q 30 70 60 60 Q 90 50 120 60 Q 90 80 60 75 Q 30 80 0 60 Z" fill="#D6B4E7" opacity="0.6" />
+          
+          {/* Inner details */}
+          <circle cx="30" cy="30" r="6" fill="#FFFFFF" opacity="0.5" />
+          <circle cx="90" cy="35" r="4" fill="#FFFFFF" opacity="0.5" />
+          <circle cx="60" cy="20" r="8" fill="#FFFFFF" opacity="0.3" />
+        </g>
+
+        {/* Small Jellyfish (Left) */}
+        <g transform="translate(150, 250)" className="float-slow" style={{ animationDelay: '-3s' }}>
+          <path d="M 10 30 Q 5 60 15 90" fill="none" stroke="#FCE7EB" strokeWidth="2" className="sway" />
+          <path d="M 20 30 Q 25 70 15 100" fill="none" stroke="#D6B4E7" strokeWidth="2.5" className="sway-reverse" />
+          <path d="M 30 30 Q 25 55 35 85" fill="none" stroke="#FCE7EB" strokeWidth="2" className="sway" />
+          
+          <path d="M 0 30 C 0 -10 40 -10 40 30 Z" fill="url(#shell-grad)" opacity="0.9" stroke="#A8E4ED" strokeWidth="1.5" />
+          <path d="M 0 30 Q 10 35 20 30 Q 30 25 40 30 Q 30 40 20 38 Q 10 40 0 30 Z" fill="#A8E4ED" opacity="0.6" />
+        </g>
+
+        {/* Swimming Fish */}
+        <g>
+          {fishSchool.map((fish) => (
+            <g 
+              key={fish.id} 
+              className={fish.direction === 1 ? "swim-right" : "swim-left"} 
+              style={{ animationDelay: fish.delay, animationDuration: fish.duration }}
+              transform={`translate(0, ${fish.y}) scale(${fish.scale * fish.direction}, ${fish.scale})`}
+            >
+              <g className="pulse" style={{ animationDelay: fish.delay }}>
+                {fish.type === 'clownfish' ? (
+                  <>
+                    <polygon points="-10,0 -20,-8 -20,8" fill="#F26D46" />
+                    <ellipse cx="0" cy="0" rx="12" ry="7" fill="#F26D46" />
+                    <path d="M -4 -6 Q -2 0 -4 6" stroke="#FFFFFF" strokeWidth="2" fill="none" />
+                    <path d="M 2 -7 Q 4 0 2 7" stroke="#FFFFFF" strokeWidth="2" fill="none" />
+                    <circle cx="6" cy="-2" r="1.5" fill="#333" />
+                  </>
+                ) : (
+                  <>
+                    <polygon points="-12,0 -22,-10 -22,10" fill="#E8B931" />
+                    <ellipse cx="0" cy="0" rx="14" ry="8" fill="#428EAD" />
+                    <circle cx="8" cy="-2" r="1.5" fill="#fff" />
+                    <circle cx="8" cy="-2" r="0.5" fill="#333" />
+                  </>
+                )}
+              </g>
+            </g>
+          ))}
+        </g>
+
+        {/* --- Bubbles --- */}
+        <g fill="#FFFFFF">
+          {bubbles.map(b => (
+            <circle 
+              key={b.id} 
+              cx={b.cx} 
+              cy={b.cy} 
+              r={b.r} 
+              className="rise" 
+              style={{ 
+                animationDelay: b.delay, 
+                animationDuration: b.duration,
+                opacity: b.opacity 
+              }} 
+            />
+          ))}
+        </g>
+
+        {/* --- Final Texture Overlay to give the watercolor feel --- */}
+        <rect 
+          width="120%" 
+          height="120%" 
+          x="-10%" 
+          y="-10%" 
+          fill="none" 
+          pointerEvents="none" 
+          filter="url(#watercolor-texture)" 
+          style={{ mixBlendMode: 'multiply', opacity: 0.6 }}
+        />
+        
+        {/* Soft vignette overlay for depth */}
+        <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+          <stop offset="60%" stopColor="transparent" stopOpacity="0" />
+          <stop offset="100%" stopColor="#1C4B5E" stopOpacity="0.4" />
+        </radialGradient>
+        <rect width="100%" height="100%" fill="url(#vignette)" pointerEvents="none" />
+
+      </svg>
+    </div>
+  );
+};
+
+export default UnderwaterWorld;

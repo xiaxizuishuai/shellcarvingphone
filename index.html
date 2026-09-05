@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>贝漾涌起</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <div class="brand-mark">贝</div>
+      <h1 class="brand-title">贝漾涌起</h1>
+    </div>
+    <nav class="nav" aria-label="主导航">
+      <a href="index.html" class="pill active">首页</a>
+      <a href="process.html" class="pill">制作流程</a>
+      <a href="ip.html" class="pill">IP形象</a>
+      <a href="products.html" class="pill">周边产品</a>
+      <a href="云工坊.html" class="pill">云工坊</a>
+    </nav>
+    <div class="header-actions">
+      <button id="userToggle" class="user-button" type="button" aria-haspopup="dialog" aria-controls="userModal">
+        <span class="user-icon">🐚</span>
+        <span id="userButtonText">登录/注册</span>
+      </button>
+      <button id="cartToggle" class="cart-button" type="button" aria-haspopup="dialog" aria-controls="cartDrawer">
+        <span class="cart-icon">🛒</span>
+        <span class="cart-label">购物车</span>
+        <span id="cartCount" class="cart-badge">0</span>
+      </button>
+      <button id="hamburgerBtn" class="hamburger-btn" type="button" aria-label="打开导航菜单" aria-expanded="false" aria-controls="mobileDrawer">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 移动端侧滑抽屉导航 -->
+  <div id="drawerBackdrop" class="drawer-backdrop" aria-hidden="true"></div>
+  <aside id="mobileDrawer" class="mobile-drawer" role="dialog" aria-modal="true" aria-label="移动端主导航" aria-hidden="true">
+    <div class="drawer-header">
+      <div class="drawer-user-card" id="drawerUserCard">
+        <div class="drawer-avatar">🐚</div>
+        <div class="drawer-user-info">
+          <div class="drawer-user-name" id="drawerUserName">欢迎来到贝漾涌起</div>
+          <button class="drawer-auth-btn" id="drawerAuthBtn" type="button">点击登录 / 注册</button>
+        </div>
+      </div>
+      <button id="drawerClose" class="drawer-close-btn" type="button" aria-label="关闭导航菜单">✕</button>
+    </div>
+    <nav class="drawer-nav">
+      <a href="index.html" class="drawer-link active"><span class="drawer-icon">🏠</span> 首页</a>
+      <a href="process.html" class="drawer-link"><span class="drawer-icon">📜</span> 制作流程</a>
+      <a href="ip.html" class="drawer-link"><span class="drawer-icon">🐚</span> IP形象 · 贝贝</a>
+      <a href="products.html" class="drawer-link"><span class="drawer-icon">🛍️</span> 周边产品</a>
+      <a href="云工坊.html" class="drawer-link"><span class="drawer-icon">🎨</span> 贝雕云工坊</a>
+    </nav>
+    <div class="drawer-footer">
+      <p>🐚 传承千年贝雕技艺 · 弘扬海洋文化</p>
+    </div>
+  </aside>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-content">
+        <h2 class="hero-title">探索贝壳雕刻的<br>千年技艺</h2>
+        <p class="hero-subtitle">认识可爱的贝贝<br>收藏精美的贝雕艺术品</p>
+        <div class="hero-actions">
+          <a href="ip.html" class="btn-hero btn-hero-secondary">
+            <span class="btn-text">认识贝贝</span>
+            <span class="btn-chevron">›</span>
+          </a>
+          <a href="云工坊.html" class="btn-hero btn-hero-primary">
+            <span class="btn-text">体验云工坊</span>
+            <span class="btn-chevron">›</span>
+          </a>
+          <a href="#products" class="btn-hero btn-hero-secondary">
+            <span class="btn-text">浏览产品</span>
+            <span class="btn-chevron">›</span>
+          </a>
+        </div>
+      </div>
+      <div class="hero-illustration">
+        <div class="hero-illustration-glow">
+          <img src="https://xiaxizuishuai.github.io/img/shellcarvingimages/media_001.jpg" alt="贝雕艺术插图"
+            class="hero-illustration-img">
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="feature-card feature-card-1">
+        <div class="feature-icon">🎨</div>
+        <h3 class="feature-title">传统工艺</h3>
+        <p class="feature-desc">传承千年的贝雕技艺，每一件作品都凝聚着匠人的心血</p>
+      </div>
+      <div class="feature-card feature-card-2">
+        <div class="feature-icon">🐚</div>
+        <h3 class="feature-title">精美艺术品</h3>
+        <p class="feature-desc">精选天然贝壳，手工雕刻，打造独一无二的艺术珍品</p>
+      </div>
+      <div class="feature-card feature-card-3">
+        <div class="feature-icon">🌊</div>
+        <h3 class="feature-title">海洋文化</h3>
+        <p class="feature-desc">探索海洋的奥秘，感受海洋文化的深厚底蕴</p>
+      </div>
+      <div class="feature-card feature-card-4">
+        <div class="feature-icon">🖌️</div>
+        <h3 class="feature-title">云工坊体验</h3>
+        <p class="feature-desc">在线体验贝雕创作，使用3D雕刻和彩绘工具，创作属于你的贝雕作品</p>
+        <a href="云工坊.html" class="feature-link">立即体验 ›</a>
+      </div>
+    </section>
+
+    <section class="video-section">
+      <video class="feature-video" controls autoplay muted loop playsinline>
+        <source src="https://xiaxizuishuai.github.io/img/shellcarvingimages/media_008.mp4" type="video/mp4">
+        您的浏览器不支持视频播放。
+      </video>
+    </section>
+
+    <section class="intro-section">
+      <h2 class="section-title">关于贝雕艺术</h2>
+      <p class="intro-text">
+        贝雕艺术是中国传统工艺美术的重要组成部分，历史悠久，技艺精湛。
+        我们致力于传承和弘扬这一珍贵的文化遗产，让更多人了解和喜爱贝雕艺术。
+        通过精美的艺术品和生动的IP形象，我们将贝雕文化带入现代生活。
+      </p>
+    </section>
+
+    <section class="intro" id="products">
+      <h2 class="intro-title">贝雕艺术周边</h2>
+      <p class="intro-subtitle">探索我们精美的贝雕艺术品和周边产品，将海洋之美带回家。</p>
+    </section>
+
+    <section class="products" id="productsGrid" aria-live="polite"></section>
+  </main>
+
+  <div id="cartBackdrop" class="cart-backdrop"></div>
+  <aside id="cartDrawer" class="cart-drawer" role="dialog" aria-hidden="true" aria-label="购物车">
+    <div class="cart-header">
+      <strong>购物车</strong>
+      <button id="cartClose" class="icon-btn" type="button" aria-label="关闭购物车">✕</button>
+    </div>
+    <div id="cartItems" class="cart-body"></div>
+    <div class="cart-footer">
+      <div class="cart-total"><span>合计</span><strong id="cartTotal">$0.00</strong></div>
+      <div class="cart-actions">
+        <button id="clearCart" class="btn secondary" type="button">清空</button>
+        <button id="checkoutBtn" class="btn primary" type="button">结算</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- 图片查看器模态框 -->
+  <div id="imageViewerBackdrop" class="image-viewer-backdrop">
+    <div id="imageViewer" class="image-viewer">
+      <div class="image-viewer-header">
+        <h3 id="imageViewerTitle" class="image-viewer-title"></h3>
+        <button id="imageViewerClose" class="icon-btn" type="button" aria-label="关闭图片查看器">✕</button>
+      </div>
+      <div class="image-viewer-body">
+        <img id="imageViewerImg" class="image-viewer-img" alt="">
+        <div class="image-viewer-controls">
+          <button id="prevImage" class="image-nav-btn" type="button" aria-label="上一张图片">‹</button>
+          <div class="image-indicators">
+            <span id="imageCounter" class="image-counter"></span>
+          </div>
+          <button id="nextImage" class="image-nav-btn" type="button" aria-label="下一张图片">›</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 用户登录/注册模态框 -->
+  <div id="userBackdrop" class="user-backdrop"></div>
+  <div id="userModal" class="user-modal" role="dialog" aria-hidden="true" aria-label="用户登录注册">
+    <div class="user-modal-header">
+      <div class="shell-decoration">
+        <span class="shell-icon">🐚</span>
+        <h2 id="userModalTitle">欢迎来到贝雕世界</h2>
+      </div>
+      <button id="userClose" class="icon-btn" type="button" aria-label="关闭">✕</button>
+    </div>
+
+    <!-- 登录表单 -->
+    <div id="loginForm" class="user-form active">
+      <form id="loginFormElement" class="auth-form">
+        <div class="form-group">
+          <label for="loginUsername">用户名</label>
+          <input type="text" id="loginUsername" name="username" required placeholder="请输入用户名">
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">密码</label>
+          <input type="password" id="loginPassword" name="password" required placeholder="请输入密码">
+        </div>
+        <button type="submit" class="btn-shell btn-shell-primary">登录</button>
+        <div class="form-footer">
+          <span>还没有账号？</span>
+          <button type="button" class="link-btn" id="switchToRegister">立即注册</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- 注册表单 -->
+    <div id="registerForm" class="user-form">
+      <form id="registerFormElement" class="auth-form">
+        <div class="form-group">
+          <label for="registerName">姓名</label>
+          <input type="text" id="registerName" name="name" required placeholder="请输入您的姓名">
+        </div>
+        <div class="form-group">
+          <label for="registerEmail">邮箱</label>
+          <input type="email" id="registerEmail" name="email" required placeholder="请输入您的邮箱">
+        </div>
+        <div class="form-group">
+          <label for="registerPassword">密码</label>
+          <input type="password" id="registerPassword" name="password" required placeholder="请设置密码（至少6位）" minlength="6">
+        </div>
+        <div class="form-group">
+          <label for="registerPhone">手机号</label>
+          <input type="tel" id="registerPhone" name="phone" required placeholder="请输入手机号">
+        </div>
+        <button type="submit" class="btn-shell btn-shell-primary">注册</button>
+        <div class="form-footer">
+          <span>已有账号？</span>
+          <button type="button" class="link-btn" id="switchToLogin">立即登录</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- 用户信息面板 -->
+    <div id="userInfoPanel" class="user-info-panel">
+      <div class="user-profile">
+        <div class="user-avatar">
+          <span class="avatar-icon">🐚</span>
+        </div>
+        <h3 id="userNameDisplay">用户名</h3>
+        <p id="userEmailDisplay">user@example.com</p>
+      </div>
+
+      <div class="user-menu">
+        <button class="menu-item" id="manageAddressBtn">
+          <span class="menu-icon">📍</span>
+          <span>收货地址管理</span>
+          <span class="menu-arrow">›</span>
+        </button>
+        <button class="menu-item" id="editProfileBtn">
+          <span class="menu-icon">✏️</span>
+          <span>编辑资料</span>
+          <span class="menu-arrow">›</span>
+        </button>
+        <button class="menu-item" id="logoutBtn">
+          <span class="menu-icon">🚪</span>
+          <span>退出登录</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 收货地址管理 -->
+    <div id="addressPanel" class="address-panel">
+      <div class="panel-header">
+        <button class="back-btn" id="backToUserInfo">‹ 返回</button>
+        <h3>收货地址管理</h3>
+      </div>
+      <div class="address-list" id="addressList">
+        <!-- 地址列表将动态生成 -->
+      </div>
+      <button class="btn-shell btn-shell-secondary" id="addAddressBtn">+ 添加新地址</button>
+    </div>
+
+    <!-- 添加/编辑地址表单 -->
+    <div id="addressFormPanel" class="address-form-panel">
+      <div class="panel-header">
+        <button class="back-btn" id="backToAddressList">‹ 返回</button>
+        <h3 id="addressFormTitle">添加收货地址</h3>
+      </div>
+      <form id="addressForm" class="auth-form">
+        <div class="form-group">
+          <label for="addressName">收货人姓名</label>
+          <input type="text" id="addressName" name="name" required placeholder="请输入收货人姓名">
+        </div>
+        <div class="form-group">
+          <label for="addressPhone">手机号</label>
+          <input type="tel" id="addressPhone" name="phone" required placeholder="请输入手机号">
+        </div>
+        <div class="form-group">
+          <label for="addressRegion">省市区</label>
+          <input type="text" id="addressRegion" name="region" required placeholder="省/市/区">
+        </div>
+        <div class="form-group">
+          <label for="addressDetail">详细地址</label>
+          <textarea id="addressDetail" name="detail" required placeholder="街道、门牌号等详细信息" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="addressDefault" name="isDefault">
+            <span>设为默认地址</span>
+          </label>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn-shell btn-shell-outline" id="cancelAddressBtn">取消</button>
+          <button type="submit" class="btn-shell btn-shell-primary">保存</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <p>© <span id="year">2023</span> 贝漾涌起 | 传承千年贝雕技艺，弘扬海洋文化</p>
+    <p>联系我们: contact@sheli-art.com | 关注微信公众号: 贝雕艺术</p>
+  </footer>
+
+  <script src="app.js"></script>
+  <script src="auth.js"></script>
+  <script>
+    // 确保导航按钮的点击事件正常工作
+    document.addEventListener('DOMContentLoaded', () => {
+      const navButtons = document.querySelectorAll('.nav .pill[data-href]');
+      navButtons.forEach(button => {
+        button.addEventListener('click', function () {
+          const href = this.getAttribute('data-href');
+          if (href) {
+            window.location.href = href;
+          }
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

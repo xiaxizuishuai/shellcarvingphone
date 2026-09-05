@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>周边产品 - 贝漾涌起</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <header class="app-header">
+    <div class="brand">
+      <div class="brand-mark">贝</div>
+      <h1 class="brand-title">贝漾涌起</h1>
+    </div>
+    <nav class="nav" aria-label="主导航">
+      <a href="index.html" class="pill">首页</a>
+      <a href="process.html" class="pill">制作流程</a>
+      <a href="ip.html" class="pill">IP形象</a>
+      <a href="products.html" class="pill active">周边产品</a>
+      <a href="云工坊.html" class="pill">云工坊</a>
+    </nav>
+    <div class="header-actions">
+      <button id="cartToggle" class="cart-button" type="button" aria-haspopup="dialog" aria-controls="cartDrawer">
+        <span class="cart-icon">🛒</span>
+        <span class="cart-label">购物车</span>
+        <span id="cartCount" class="cart-badge">0</span>
+      </button>
+      <button id="hamburgerBtn" class="hamburger-btn" type="button" aria-label="打开导航菜单" aria-expanded="false" aria-controls="mobileDrawer">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 移动端侧滑抽屉导航 -->
+  <div id="drawerBackdrop" class="drawer-backdrop" aria-hidden="true"></div>
+  <aside id="mobileDrawer" class="mobile-drawer" role="dialog" aria-modal="true" aria-label="移动端主导航" aria-hidden="true">
+    <div class="drawer-header">
+      <div class="drawer-user-card" id="drawerUserCard">
+        <div class="drawer-avatar">🐚</div>
+        <div class="drawer-user-info">
+          <div class="drawer-user-name" id="drawerUserName">欢迎来到贝漾涌起</div>
+          <button class="drawer-auth-btn" id="drawerAuthBtn" type="button">点击登录 / 注册</button>
+        </div>
+      </div>
+      <button id="drawerClose" class="drawer-close-btn" type="button" aria-label="关闭导航菜单">✕</button>
+    </div>
+    <nav class="drawer-nav">
+      <a href="index.html" class="drawer-link"><span class="drawer-icon">🏠</span> 首页</a>
+      <a href="process.html" class="drawer-link"><span class="drawer-icon">📜</span> 制作流程</a>
+      <a href="ip.html" class="drawer-link"><span class="drawer-icon">🐚</span> IP形象 · 贝贝</a>
+      <a href="products.html" class="drawer-link active"><span class="drawer-icon">🛍️</span> 周边产品</a>
+      <a href="云工坊.html" class="drawer-link"><span class="drawer-icon">🎨</span> 贝雕云工坊</a>
+    </nav>
+    <div class="drawer-footer">
+      <p>🐚 传承千年贝雕技艺 · 弘扬海洋文化</p>
+    </div>
+  </aside>
+
+  <main class="container">
+    <section class="intro">
+      <h2 class="intro-title">贝雕艺术周边</h2>
+      <p class="intro-subtitle">探索我们精美的贝雕艺术品和周边产品，将海洋之美带回家。</p>
+    </section>
+
+    <section class="products" id="productsGrid" aria-live="polite"></section>
+  </main>
+
+  <div id="cartBackdrop" class="cart-backdrop"></div>
+  <aside id="cartDrawer" class="cart-drawer" role="dialog" aria-hidden="true" aria-label="购物车">
+    <div class="cart-header">
+      <strong>购物车</strong>
+      <button id="cartClose" class="icon-btn" type="button" aria-label="关闭购物车">✕</button>
+    </div>
+    <div id="cartItems" class="cart-body"></div>
+    <div class="cart-footer">
+      <div class="cart-total"><span>合计</span><strong id="cartTotal">¥0.00</strong></div>
+      <div class="cart-actions">
+        <button id="clearCart" class="btn secondary" type="button">清空</button>
+        <button id="checkoutBtn" class="btn primary" type="button">结算</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- 图片查看器模态框 -->
+  <div id="imageViewerBackdrop" class="image-viewer-backdrop">
+    <div id="imageViewer" class="image-viewer">
+      <div class="image-viewer-header">
+        <h3 id="imageViewerTitle" class="image-viewer-title"></h3>
+        <button id="imageViewerClose" class="icon-btn" type="button" aria-label="关闭图片查看器">✕</button>
+      </div>
+      <div class="image-viewer-body">
+        <img id="imageViewerImg" class="image-viewer-img" alt="">
+        <div class="image-viewer-controls">
+          <button id="prevImage" class="image-nav-btn" type="button" aria-label="上一张图片">‹</button>
+          <div class="image-indicators">
+            <span id="imageCounter" class="image-counter"></span>
+          </div>
+          <button id="nextImage" class="image-nav-btn" type="button" aria-label="下一张图片">›</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <p>© <span id="year">2023</span> 贝漾涌起 | 传承千年贝雕技艺，弘扬海洋文化</p>
+    <p>联系我们: contact@shell-art.com | 关注微信公众号: 贝雕艺术</p>
+  </footer>
+
+  <script src="app.js"></script>
+  <script src="auth.js"></script>
+</body>
+
+</html>

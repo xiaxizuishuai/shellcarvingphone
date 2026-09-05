@@ -1,0 +1,145 @@
+{
+    "project": {
+      "name": "贝漾涌起网站复刻",
+      "description": "严格按照原设计复刻贝漾涌起网站的IP形象页面",
+      "layout": "单页面应用，包含导航栏、IP形象介绍、页脚等部分"
+    },
+  
+    "header": {
+      "logo": {
+        "text": "贝漾涌起",
+        "subtitle": "探索贝壳雕刻的千年技艺，认识可爱的贝贝，收藏精美的贝雕艺术品"
+      },
+      "navigation": {
+        "items": [
+          {"text": "首页", "link": "#home"},
+          {"text": "制作流程", "link": "#process"},
+          {"text": "IP形象", "link": "#ip", "active": true},
+          {"text": "周边产品", "link": "#products"}
+        ],
+        "style": "水平导航栏，当前页面高亮显示"
+      }
+    },
+  
+    "ipSection": {
+      "title": "IP形象 - 贝贝",
+      "intro": "贝贝是我们贝雕文化的形象大使，代表着海洋的智慧和艺术的灵性。",
+      
+      "storySection": {
+        "title": "贝贝的故事",
+        "content": "贝贝诞生于南海之滨，由一枚拥有千年历史的珍珠贝孕育而生。它继承了海洋的智慧和贝壳的坚韧，肩负着传播贝雕文化的使命。",
+        "layout": "标题+段落文本"
+      },
+  
+      "appearanceSection": {
+        "title": "形象特征",
+        "content": "贝贝的设计融合了贝壳的纹理和海洋生物的特征，拥有珍珠般闪亮的眼睛和贝壳纹理的身体，色彩以海洋蓝和珍珠白为主。",
+        "layout": "标题+段落文本"
+      },
+  
+      "personalitySection": {
+        "title": "性格特点",
+        "traits": [
+          "充满好奇心",
+          "富有创造力",
+          "坚韧不拔",
+          "热爱艺术", 
+          "守护传统"
+        ],
+        "layout": "标题+横向排列的特征标签或图标"
+      },
+  
+      "friendsSection": {
+        "title": "贝贝的朋友们",
+        "description": "在贝贝的冒险旅程中，它结识了许多海洋朋友，共同守护海洋文化和传统工艺。",
+        "friends": [
+          {
+            "name": "甜甜",
+            "type": "勇敢的小螃蟹，贝贝的忠实伙伴"
+          },
+          {
+            "name": "泡泡",
+            "type": "活泼的小丑鱼，团队的气氛担当"
+          },
+          {
+            "name": "柔柔", 
+            "type": "温柔的水母，团队的智慧担当"
+          }
+        ],
+        "layout": "标题+描述+三个朋友的水平排列卡片"
+      }
+    },
+  
+    "footer": {
+      "copyright": "© 2023 贝漾涌起 | 传承千年贝雕技艺，弘扬海洋文化",
+      "contact": {
+        "email": "contact@sheli-art.com",
+        "wechat": "关注微信公众号：贝雕艺术"
+      },
+      "layout": "居中文本，分两行显示"
+    },
+  
+    "designSpecs": {
+      "colorPalette": {
+        "primaryBlue": "#1e4b7c",
+        "oceanBlue": "#2c6ba0", 
+        "pearlWhite": "#f8f9fa",
+        "shellBeige": "#f5f1e6",
+        "accentGold": "#d4af37",
+        "textDark": "#2c3e50",
+        "textLight": "#5d7a9c"
+      },
+      
+      "typography": {
+        "chineseFont": "'Microsoft YaHei', 'SimHei', 'PingFang SC', sans-serif",
+        "fontWeights": {
+          "regular": 400,
+          "medium": 500,
+          "bold": 700
+        },
+        "fontSizes": {
+          "title": "28px",
+          "sectionTitle": "24px", 
+          "content": "16px",
+          "small": "14px"
+        }
+      },
+      
+      "spacing": {
+        "sectionPadding": "60px 0",
+        "contentMargin": "30px 0",
+        "elementGap": "20px"
+      },
+      
+      "layout": {
+        "containerWidth": "1200px",
+        "contentMaxWidth": "800px",
+        "cardWidth": "250px"
+      },
+      
+      "visualElements": {
+        "borderRadius": "8px",
+        "shadow": "0 4px 12px rgba(0,0,0,0.1)",
+        "gradient": "linear-gradient(135deg, #1e4b7c 0%, #2c6ba0 100%)"
+      }
+    },
+  
+    "contentStructure": [
+      {"type": "header", "order": 1},
+      {"type": "ipTitle", "order": 2},
+      {"type": "ipIntro", "order": 3},
+      {"type": "storySection", "order": 4},
+      {"type": "appearanceSection", "order": 5},
+      {"type": "personalitySection", "order": 6},
+      {"type": "friendsSection", "order": 7},
+      {"type": "footer", "order": 8}
+    ],
+  
+    "images": {
+      "ipMain": "https://xiaxizuishuai.github.io/2026/06/09/shell/images/beibei-main.png",
+      "friendTiantian": "https://xiaxizuishuai.github.io/2026/06/09/shell/images/tiantian-crab.png",
+      "friendPaopao": "https://xiaxizuishuai.github.io/2026/06/09/shell/images/paopao-fish.png", 
+      "friendRourou": "https://xiaxizuishuai.github.io/2026/06/09/shell/images/rourou-jellyfish.png",
+      "background": "https://xiaxizuishuai.github.io/2026/06/09/shell/images/ocean-bg.jpg"
+    }
+  }

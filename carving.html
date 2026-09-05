@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>贝雕雕刻技法 - 贝漾涌起</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="material-secret-page">
+  <header class="app-header">
+    <div class="brand">
+      <div class="brand-mark">贝</div>
+      <h1 class="brand-title">贝漾涌起</h1>
+    </div>
+    <nav class="nav" aria-label="主导航">
+      <a href="index.html" class="pill">首页</a>
+      <a href="process.html" class="pill active">制作流程</a>
+      <a href="ip.html" class="pill">IP形象</a>
+      <a href="products.html" class="pill">周边产品</a>
+      <a href="云工坊.html" class="pill">云工坊</a>
+    </nav>
+    <div class="header-actions">
+      <a href="products.html" class="cart-button">
+        <span class="cart-icon">🛒</span>
+        <span class="cart-label">购物车</span>
+      </a>
+      <button id="hamburgerBtn" class="hamburger-btn" type="button" aria-label="打开导航菜单" aria-expanded="false" aria-controls="mobileDrawer">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 移动端侧滑抽屉导航 -->
+  <div id="drawerBackdrop" class="drawer-backdrop" aria-hidden="true"></div>
+  <aside id="mobileDrawer" class="mobile-drawer" role="dialog" aria-modal="true" aria-label="移动端主导航" aria-hidden="true">
+    <div class="drawer-header">
+      <div class="drawer-user-card" id="drawerUserCard">
+        <div class="drawer-avatar">🐚</div>
+        <div class="drawer-user-info">
+          <div class="drawer-user-name" id="drawerUserName">欢迎来到贝漾涌起</div>
+          <button class="drawer-auth-btn" id="drawerAuthBtn" type="button">点击登录 / 注册</button>
+        </div>
+      </div>
+      <button id="drawerClose" class="drawer-close-btn" type="button" aria-label="关闭导航菜单">✕</button>
+    </div>
+    <nav class="drawer-nav">
+      <a href="index.html" class="drawer-link"><span class="drawer-icon">🏠</span> 首页</a>
+      <a href="process.html" class="drawer-link active"><span class="drawer-icon">📜</span> 制作流程</a>
+      <a href="ip.html" class="drawer-link"><span class="drawer-icon">🐚</span> IP形象 · 贝贝</a>
+      <a href="products.html" class="drawer-link"><span class="drawer-icon">🛍️</span> 周边产品</a>
+      <a href="云工坊.html" class="drawer-link"><span class="drawer-icon">🎨</span> 贝雕云工坊</a>
+    </nav>
+    <div class="drawer-footer">
+      <p>🐚 传承千年贝雕技艺 · 弘扬海洋文化</p>
+    </div>
+  </aside>
+
+  <main class="material-secret-main">
+    <!-- Background Layers -->
+    <div class="process-bg-gradient"></div>
+    <div class="process-bg-overlay tiffany-overlay"></div>
+    <div class="process-bg-overlay radial-glow"></div>
+    <div class="sparkle-container" id="sparkleContainer"></div>
+
+    <!-- 文章容器 -->
+    <article class="article-container">
+      <!-- 文章头部 -->
+      <header class="article-header">
+        <h1 class="article-title">🐚 贝雕大揭秘：看大海的精灵如何「变身」绝美艺术品！</h1>
+        <div class="article-meta">
+          <p class="article-subtitle">✨ 你以为贝壳只能躺在沙滩上晒太阳吗？在匠人的手中，它们即将经历一场华丽的"整容手术"。</p>
+        </div>
+      </header>
+
+      <!-- 文章内容 -->
+      <div class="article-content">
+        <p class="article-lead">每一片贝壳都自带独一无二的色泽和纹理，而我们做的，就是用精湛的雕刻技艺，唤醒沉睡在甲壳里的灵魂！✨</p>
+        <p>想知道大海的礼物是如何变成艺术品的吗？来看看我们的四大核心"魔法"吧！👇</p>
+
+        <h2>🔨 浮雕技法：在毫厘之间"盖楼"</h2>
+        <p><strong>关键词</strong>：层次感、立体画、精细</p>
+        
+        <div class="article-shell-item">
+          <div class="shell-image-wrapper">
+            <img src="https://xiaxizuishuai.github.io/img/shellcarvingimages/media_015.jpg" alt="浮雕技法" class="shell-image" loading="lazy">
+          </div>
+          <div class="shell-text">
+            <p>这可是贝雕界的"基本功"，但也是最考究耐心的！匠人利用贝壳天然的弧度和色彩层，像画油画一样，把图案一层层"推"出来。</p>
+            <ul>
+              <li><strong>浅浮雕</strong>：如同薄纱般的轻盈，纹理若隐若现。</li>
+              <li><strong>高浮雕</strong>：起伏强烈，视觉冲击力 MAX！💥</li>
+            </ul>
+            <p><strong>👀看点</strong>：仔细看那些花瓣的边缘和鸟儿的羽毛，是不是像要从贝壳里飞出来一样？</p>
+          </div>
+        </div>
+
+        <h2>🕸️ 镂空技法：刀尖上的"走钢丝"</h2>
+        <p><strong>关键词</strong>：通透、惊险、光影游戏</p>
+        
+        <div class="article-shell-item">
+          <div class="shell-image-wrapper">
+            <img src="https://xiaxizuishuai.github.io/img/shellcarvingimages/media_039.png" alt="镂空技法" class="shell-image" loading="lazy">
+          </div>
+          <div class="shell-text">
+            <p>这是最让人手心冒汗的环节！💦 师傅们要在坚硬易碎的贝壳上，雕刻出像蕾丝一样复杂的空灵图案。只要手抖一下，整块贝壳可能就"碎碎平安"了……😱</p>
+            <p><strong>👀看点</strong>：当光线穿过那些镂空的缝隙，投射出斑驳的影子，你会发现，遗憾也是一种美（并没有，我们追求完美！）</p>
+          </div>
+        </div>
+
+        <h2>🔄 圆雕技法：360° 无死角的美</h2>
+        <p><strong>关键词</strong>：立体、全景、栩栩如生</p>
+        
+        <div class="article-shell-item">
+          <div class="shell-image-wrapper">
+            <img src="https://xiaxizuishuai.github.io/img/shellcarvingimages/media_006.png" alt="圆雕技法" class="shell-image" loading="lazy">
+          </div>
+          <div class="shell-text">
+            <p>如果不满足于平面，那就来点更立体的！圆雕要求我们根据贝壳原本的形状（比如海螺的螺旋），因势象形，雕刻出完全立体的形象。无论是憨态可掬的小动物 🐢，还是优美的人物造型 🧚‍♀️，前后左右，怎么看都有戏！</p>
+            <p><strong>👀看点</strong>：拿在手里转一圈，每一个角度都是惊喜。</p>
+          </div>
+        </div>
+
+        <h2>🧩 镶嵌（螺钿）技法：大海的"拼图游戏"</h2>
+        <p><strong>关键词</strong>：色彩、光泽、极繁主义</p>
+        
+        <div class="article-shell-item">
+          <div class="shell-image-wrapper">
+            <img src="https://xiaxizuishuai.github.io/img/shellcarvingimages/media_040.jpg" alt="镶嵌技法" class="shell-image" loading="lazy">
+          </div>
+          <div class="shell-text">
+            <p>将不同颜色的贝壳打磨成特定的薄片，像拼图一样，一点点镶嵌在木器或底座上。这不仅是雕刻，更是色彩的搭配艺术！🎨 贝壳特有的珍珠光泽，会随着你的视角变化而闪烁，这就是传说中的"五彩斑斓的白"！✨</p>
+            <p><strong>👀看点</strong>：在这个区域，你可以看到贝壳最原始、最绚丽的色彩碰撞。</p>
+          </div>
+        </div>
+
+        <div class="article-quote">
+          <h2>🌊 每一刀，都是对大海的致敬</h2>
+          <p class="quote-text">贝雕，是 <strong>"天工"与"人工"</strong> 的完美合谋。我们不生产美，我们只是大海的搬运工和修饰师。希望你能从这些精美的雕痕中，听见海浪的声音~ 🐚💙</p>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="app-footer">
+    <p>© <span id="year">2023</span> 贝漾涌起 | 传承千年贝雕技艺，弘扬海洋文化</p>
+    <p>联系我们: contact@sheli-art.com | 关注微信公众号: 贝雕艺术</p>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const yearEl = document.getElementById('year');
+      if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+      }
+      
+      initSparkleBackground();
+    });
+
+    function initSparkleBackground() {
+      const container = document.getElementById('sparkleContainer');
+      if (!container) return;
+
+      const particleCount = 75;
+      // 根据 processbackground.json 的百分比分布
+      const colorWeights = [
+        { color: 'rgba(10, 186, 181, 0.6)', weight: 40 }, // tiffanyBright
+        { color: 'rgba(255, 255, 255, 0.8)', weight: 30 }, // white
+        { color: 'rgba(10, 186, 181, 0.4)', weight: 20 }, // tiffanyMedium
+        { color: 'rgba(200, 240, 255, 0.6)', weight: 10 }  // lightBlue
+      ];
+
+      function getWeightedColor() {
+        const totalWeight = colorWeights.reduce((sum, item) => sum + item.weight, 0);
+        let random = Math.random() * totalWeight;
+        for (const item of colorWeights) {
+          random -= item.weight;
+          if (random <= 0) return item.color;
+        }
+        return colorWeights[0].color;
+      }
+
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'sparkle-particle';
+        
+        const size = Math.random() * 4 + 2;
+        const color = getWeightedColor();
+        const duration = Math.random() * 5 + 3;
+        const delay = Math.random() * 2;
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
+        
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.backgroundColor = color;
+        particle.style.left = `${x}%`;
+        particle.style.top = `${y}%`;
+        particle.style.animationDuration = `${duration}s`;
+        particle.style.animationDelay = `${delay}s`;
+        
+        container.appendChild(particle);
+      }
+    }
+  </script>
+  <script src="app.js"></script>
+  <script src="auth.js"></script>
+</body>
+</html>
+
