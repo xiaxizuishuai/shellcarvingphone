@@ -5,14 +5,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>贝漾涌起</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@600&display=swap"
-    rel="stylesheet">
+  <!-- 首屏极速加载优化：优先预加载轻量 WebP 主页背景图 -->
+  <link rel="preload" as="image" href="background.webp" type="image/webp" fetchpriority="high">
   <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body>
+<body class="home-page">
+  <!-- 首页全屏沉浸式背景图层 -->
+  <div class="home-fixed-bg" aria-hidden="true"></div>
   <header class="app-header">
     <div class="brand">
       <div class="brand-mark">贝</div>
@@ -91,7 +91,7 @@
       <div class="hero-illustration">
         <div class="hero-illustration-glow">
           <img src="https://xiaxizuishuai.github.io/img/shellcarvingimages/media_001.jpg" alt="贝雕艺术插图"
-            class="hero-illustration-img">
+            class="hero-illustration-img" loading="eager" fetchpriority="high" decoding="async">
         </div>
       </div>
     </section>
@@ -121,8 +121,9 @@
     </section>
 
     <section class="video-section">
-      <video class="feature-video" controls autoplay muted loop playsinline>
-        <source src="https://xiaxizuishuai.github.io/img/shellcarvingimages/media_008.mp4" type="video/mp4">
+      <!-- 视频智能按需懒加载：首屏不自动下载8MB大视频，滚动到视口再按需加载 -->
+      <video class="feature-video" controls muted loop playsinline preload="none" data-src="https://xiaxizuishuai.github.io/img/shellcarvingimages/media_008.mp4">
+        <source src="" type="video/mp4">
         您的浏览器不支持视频播放。
       </video>
     </section>
@@ -319,8 +320,8 @@
     <p>联系我们: contact@sheli-art.com | 关注微信公众号: 贝雕艺术</p>
   </footer>
 
-  <script src="app.js"></script>
-  <script src="auth.js"></script>
+  <script src="app.js" defer></script>
+  <script src="auth.js" defer></script>
   <script>
     // 确保导航按钮的点击事件正常工作
     document.addEventListener('DOMContentLoaded', () => {

@@ -86,6 +86,8 @@ function renderProducts() {
     const img = document.createElement('img');
     img.src = product.images[0];
     img.alt = product.name;
+    img.loading = 'lazy';
+    img.decoding = 'async';
     img.style.cursor = 'pointer'; // 添加指针样式
     img.addEventListener('click', () => openImageViewer(product, 0));
     media.appendChild(img);
@@ -491,9 +493,50 @@ function wireUI() {
   initImageViewerTouch();
 }
 
+// 首页视频智能按需懒加载：当且仅当视频进入视口时才载入资源，消除首屏阻塞
+function initVideoLazyLoad() {
+  const video = document.querySelector('.feature-video[data-src]');
+  if (!video) return;
+
+  const loadVideo = () => {
+    const src = video.getAttribute('data-src');
+    if (src && !video.currentSrc) {
+      const source = video.querySelector('source');
+      if (source) {
+        source.src = src;
+      } else {
+        video.src = src;
+      }
+      video.load();
+      // 视口内尝试自动静音播放
+      video.play().catch(() => {});
+    }
+  };
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          loadVideo();
+          obs.unobserve(video);
+        }
+      });
+    }, { rootMargin: '150px 0px', threshold: 0.1 });
+    observer.observe(video);
+  } else {
+    // 降级兜底：延迟触发
+    window.addEventListener('load', () => {
+      setTimeout(loadVideo, 2000);
+    });
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   // 通用移动端侧滑抽屉初始化
   initMobileDrawer();
+
+  // 首页视频按需懒加载初始化（秒开优化）
+  initVideoLazyLoad();
 
   // 页面年份更新
   const yearEl = $('#year');
