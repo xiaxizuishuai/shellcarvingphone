@@ -509,7 +509,7 @@ function initVideoLazyLoad() {
       }
       video.load();
       // 视口内尝试自动静音播放
-      video.play().catch(() => {});
+      video.play().catch(() => { });
     }
   };
 
@@ -558,6 +558,132 @@ document.addEventListener('DOMContentLoaded', () => {
       cartToggle.addEventListener('click', openCart);
     }
   }
+
+  // 初始化页脚社交账号交互（微信公众号、抖音号关注与复制）
+  initFooterSocial();
 });
+
+// 通用剪贴板复制工具
+function copyTextToClipboard(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    return navigator.clipboard.writeText(text).catch(() => fallbackCopyText(text));
+  } else {
+    return fallbackCopyText(text);
+  }
+}
+
+function fallbackCopyText(text) {
+  return new Promise((resolve, reject) => {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-9999px';
+    textArea.style.top = '0';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      const successful = document.execCommand('copy');
+      document.body.removeChild(textArea);
+      if (successful) resolve();
+      else reject(new Error('copy command failed'));
+    } catch (err) {
+      document.body.removeChild(textArea);
+      reject(err);
+    }
+  });
+}
+
+// 通用 Toast 提示函数
+function showFooterToast(msg) {
+  let toast = document.getElementById('footerToast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'footerToast';
+    toast.className = 'design-toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2500);
+}
+
+// 页脚社交互动功能
+function initFooterSocial() {
+  const wechatBtn = document.getElementById('footerWechatBtn');
+  const douyinBtn = document.getElementById('footerDouyinBtn');
+  const wechatModal = document.getElementById('wechatModal');
+  const wechatModalClose = document.getElementById('wechatModalClose');
+  const btnCopyWechat = document.getElementById('btnCopyWechat');
+  const wechatAccountFullName = '贝漾涌起 非遗贝雕创新实践团队';
+
+  // 微信公众号点击
+  if (wechatBtn) {
+    wechatBtn.addEventListener('click', (e) => {
+      const directUrl = wechatBtn.getAttribute('data-wechat-url') || '';
+      if (directUrl && (directUrl.startsWith('http://') || directUrl.startsWith('https://'))) {
+        // 如果配置了直接跳转的微信文章/外链，则新窗口打开
+        window.open(directUrl, '_blank');
+        return;
+      }
+
+      e.preventDefault();
+      // 复制公众号全称
+      copyTextToClipboard(wechatAccountFullName).then(() => {
+        showFooterToast('已复制公众号全称【' + wechatAccountFullName + '】✨');
+      }).catch(() => { });
+
+      // 展开弹窗引导
+      if (wechatModal) {
+        wechatModal.classList.add('active');
+        wechatModal.setAttribute('aria-hidden', 'false');
+      }
+    });
+  }
+
+  // 微信弹窗内一键复制按钮
+  if (btnCopyWechat) {
+    btnCopyWechat.addEventListener('click', () => {
+      copyTextToClipboard(wechatAccountFullName).then(() => {
+        btnCopyWechat.textContent = '已复制 ✓';
+        showFooterToast('已复制！打开微信搜索即可关注 🐚');
+        setTimeout(() => {
+          btnCopyWechat.textContent = '复制名称';
+        }, 2000);
+      }).catch(() => {
+        showFooterToast('复制失败，请长按手动复制全称');
+      });
+    });
+  }
+
+  // 关闭微信弹窗
+  if (wechatModalClose && wechatModal) {
+    wechatModalClose.addEventListener('click', () => {
+      wechatModal.classList.remove('active');
+      wechatModal.setAttribute('aria-hidden', 'true');
+    });
+
+    // 点击背景遮罩关闭
+    wechatModal.addEventListener('click', (e) => {
+      if (e.target === wechatModal) {
+        wechatModal.classList.remove('active');
+        wechatModal.setAttribute('aria-hidden', 'true');
+      }
+    });
+  }
+
+  // 抖音官方号点击
+  if (douyinBtn) {
+    douyinBtn.addEventListener('click', () => {
+      // 复制抖音号并给予提示，随后直达抖音个人主页
+      copyTextToClipboard('30470529091').then(() => {
+        showFooterToast('已复制抖音号【30470529091】，正在前往抖音主页 🎵');
+      }).catch(() => { });
+    });
+  }
+}
 
 

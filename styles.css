@@ -87,10 +87,64 @@ body.ip-page {
   min-height: 100vh;
 }
 
-/* Products page background */
+/* 周边产品页面全屏沉浸式背景层：自适应、硬件加速 */
+.products-fixed-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  background-image: url('background3.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  z-index: -2;
+  pointer-events: none;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform;
+}
+
+/* 周边产品页主体在全屏背景下的透明容器 */
 body.products-page {
-  background: linear-gradient(135deg, rgb(16, 29, 61) 0%, rgb(27, 54, 136) 100%);
+  background: transparent;
   min-height: 100vh;
+}
+
+/* 周边产品页沉浸式背景通透层与卡片质感 */
+body.products-page .intro {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 20px 24px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 24px rgba(44, 62, 80, 0.08);
+  margin-bottom: 20px;
+}
+
+body.products-page .intro-title {
+  color: #1e3a5f;
+}
+
+body.products-page .intro-subtitle {
+  color: #4a6b82;
+}
+
+body.products-page .products .card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 24px rgba(30, 64, 175, 0.08);
+}
+
+body.products-page .app-footer {
+  color: #1a4968;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
 /* Header */
@@ -1508,8 +1562,290 @@ body.products-page {
 /* Footer */
 .app-footer {
   text-align: center;
-  padding: 24px 16px;
+  padding: 28px 16px calc(var(--safe-area-bottom) + 24px);
   color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* 首页专属极简社交平台关注区（简约圆形图标风格） */
+.footer-follow-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.follow-heading {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e3a5f;
+  letter-spacing: 0.8px;
+  margin-bottom: 12px;
+  opacity: 0.88;
+}
+
+.social-circle-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.social-circle-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #38bdf8 0%, #1e40af 100%);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(30, 64, 175, 0.32), inset 0 1px 1px rgba(255, 255, 255, 0.45);
+  transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  position: relative;
+}
+
+.social-circle-btn svg {
+  width: 21px;
+  height: 21px;
+  fill: currentColor;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.18));
+  transition: transform 0.25s ease;
+}
+
+.social-circle-btn:hover {
+  transform: translateY(-3px) scale(1.08);
+  background: linear-gradient(135deg, #60a5fa 0%, #1d4ed8 100%);
+  box-shadow: 0 8px 24px rgba(29, 78, 216, 0.45), inset 0 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+.social-circle-btn:hover svg {
+  transform: scale(1.1);
+}
+
+.social-circle-btn:active {
+  transform: scale(0.94);
+  box-shadow: 0 2px 8px rgba(30, 64, 175, 0.25);
+}
+
+.footer-copy-text {
+  font-size: 12px;
+  color: #8c9ba5;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+/* 微信关注引导弹窗（遮罩） */
+.wechat-follow-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.wechat-follow-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 微信专属卡片：精致海洋渐变蓝 */
+.wechat-follow-modal .card,
+#wechatCard.card {
+  width: 190px;
+  height: 264px;
+  background: rgb(37, 99, 235);
+  background: linear-gradient(155deg, #38bdf8 0%, #1e40af 100%);
+  font-family: inherit;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 16px 36px rgba(30, 64, 175, 0.38);
+  cursor: pointer;
+  user-select: none;
+  overflow: hidden;
+  box-sizing: border-box;
+  transform: scale(0.92) translateY(10px);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  display: block;
+  text-align: left;
+  opacity: 1;
+}
+
+.wechat-follow-modal.active .card,
+.wechat-follow-modal.active #wechatCard.card {
+  transform: scale(1) translateY(0);
+}
+
+.wechat-follow-modal .card:hover,
+#wechatCard.card:hover {
+  box-shadow: 0 20px 42px rgba(30, 64, 175, 0.48);
+}
+
+.wechat-card-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 26px;
+  height: 26px;
+  border: none;
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  z-index: 10;
+  backdrop-filter: blur(4px);
+}
+
+.wechat-card-close:hover {
+  background: rgba(255, 255, 255, 0.38);
+}
+
+.wechat-follow-modal .quote {
+  color: rgba(255, 255, 255, 0.45);
+  padding-left: 30px;
+  padding-top: 14px;
+  position: relative;
+  font-size: 32px;
+  font-family: Georgia, serif;
+  line-height: 1;
+}
+
+.wechat-follow-modal .card-name {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.88);
+  padding: 8px 24px 0 30px;
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.8px;
+  line-height: 23px;
+}
+
+.wechat-follow-modal .body-text {
+  font-size: 20px;
+  font-weight: 900;
+  padding: 55px 20px 0 30px;
+  color: #ffffff;
+  position: absolute;
+  top: 40px;
+  left: 1px;
+  line-height: 23px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.wechat-follow-modal .body-text .team-badge-text {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.88);
+  margin-top: 6px;
+  line-height: 1.4;
+  letter-spacing: 0.2px;
+}
+
+.wechat-follow-modal .author-container {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 16px;
+}
+
+.wechat-follow-modal .pic {
+  width: 48px;
+  height: 48px;
+  background-color: rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.wechat-follow-modal .pic svg {
+  width: 24px;
+  height: 24px;
+  fill: #ffffff;
+}
+
+.wechat-follow-modal .author {
+  font-weight: 700;
+  color: #ffffff;
+  padding-left: 12px;
+  margin-top: 5px;
+  font-size: 11px;
+  opacity: 0.9;
+  transition: 0.5s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.wechat-follow-modal .card:hover .author,
+.wechat-follow-modal .card:active .author {
+  opacity: 1;
+}
+
+.wechat-follow-modal .card .author svg {
+  display: inline;
+  font-size: 12px;
+  width: 12px;
+  height: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  fill: currentColor;
+}
+
+/* 微信直达按钮 */
+.btn-card-open-wechat {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 22px;
+  background: #ffffff;
+  color: #1e40af;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  transition: all 0.25s ease;
+}
+
+.btn-card-open-wechat:hover,
+.btn-card-open-wechat:active {
+  background: #f0f9ff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.32);
 }
 
 /* ============================================
@@ -2003,8 +2339,17 @@ body.products-page {
 }
 
 @keyframes pulseDot {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.3); opacity: 0.7; }
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.3);
+    opacity: 0.7;
+  }
 }
 
 .hero-card-grid {
@@ -2074,8 +2419,15 @@ body.products-page {
 }
 
 @keyframes ctaShine {
-  0%, 60% { left: -100%; }
-  100% { left: 160%; }
+
+  0%,
+  60% {
+    left: -100%;
+  }
+
+  100% {
+    left: 160%;
+  }
 }
 
 .hero-main-cta:hover {
@@ -2188,9 +2540,20 @@ body.products-page {
   flex-shrink: 0;
 }
 
-.icon-ip { background: linear-gradient(135deg, #e0f2fe, #bae6fd); color: #0284c7; }
-.icon-process { background: linear-gradient(135deg, #fef3c7, #fde68a); color: #d97706; }
-.icon-shop { background: linear-gradient(135deg, #fee2e2, #fecaca); color: #dc2626; }
+.icon-ip {
+  background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+  color: #0284c7;
+}
+
+.icon-process {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  color: #d97706;
+}
+
+.icon-shop {
+  background: linear-gradient(135deg, #fee2e2, #fecaca);
+  color: #dc2626;
+}
 
 .capsule-content {
   display: flex;
@@ -4127,6 +4490,7 @@ body.ip-page .app-footer {
    ========================================================================== */
 
 @media (max-width: 768px) {
+
   /* 全局容器间距 (消除顶部留白深坑) */
   .container {
     padding: 8px 12px 24px !important;
@@ -4321,7 +4685,8 @@ body.ip-page .app-footer {
   .form-group input,
   .form-group textarea,
   .form-group select {
-    font-size: 16px !important; /* 避免 iOS Safari 聚焦放大 */
+    font-size: 16px !important;
+    /* 避免 iOS Safari 聚焦放大 */
   }
 
   /* 双列文创商品卡片流 (2列布局) */
@@ -4446,10 +4811,7 @@ body.ip-page .app-footer {
     border-radius: 50% !important;
     transform: none !important;
     display: block !important;
-    filter: drop-shadow(0 0 16px rgba(255, 0, 255, 0.55))
-            drop-shadow(0 0 24px rgba(0, 255, 255, 0.45))
-            drop-shadow(0 0 32px rgba(255, 255, 0, 0.35))
-            drop-shadow(0 0 40px rgba(255, 0, 0, 0.25)) !important;
+    filter: drop-shadow(0 0 16px rgba(255, 0, 255, 0.55)) drop-shadow(0 0 24px rgba(0, 255, 255, 0.45)) drop-shadow(0 0 32px rgba(255, 255, 0, 0.35)) drop-shadow(0 0 40px rgba(255, 0, 0, 0.25)) !important;
   }
 
   .hero-content {
@@ -4768,6 +5130,16 @@ body.ip-page .app-footer {
 
 /* 超窄屏手机进一步保护 (< 340px) */
 @media (max-width: 340px) {
+  .products {
+    grid-template-columns: 1fr !important;
+  }
+
+  .features {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+* 超窄屏手机进一步保护 (< 340px) */ @media (max-width: 340px) {
   .products {
     grid-template-columns: 1fr !important;
   }
