@@ -4,9 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>IP形象 - 贝漾涌起</title>
+  <!-- 预加载IP形象页面全屏背景图 -->
+  <link rel="preload" as="image" href="background2.png" fetchpriority="high">
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+<body class="ip-page">
+  <!-- IP形象页面全屏沉浸式背景图层 -->
+  <div class="ip-fixed-bg" aria-hidden="true"></div>
   <header class="app-header">
     <div class="brand">
       <div class="brand-mark">贝</div>

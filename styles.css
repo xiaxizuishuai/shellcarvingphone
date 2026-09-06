@@ -60,6 +60,33 @@ body.home-page {
   min-height: 100vh;
 }
 
+/* IP形象页面全屏沉浸式背景层：自适应、硬件加速 */
+.ip-fixed-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  background-image: url('background2.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  z-index: -2;
+  pointer-events: none;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform;
+}
+
+/* IP形象页主体在全屏背景下的透明容器 */
+body.ip-page {
+  background: transparent;
+  min-height: 100vh;
+}
+
 /* Products page background */
 body.products-page {
   background: linear-gradient(135deg, rgb(16, 29, 61) 0%, rgb(27, 54, 136) 100%);
@@ -2765,6 +2792,66 @@ body.products-page {
   color: var(--text-secondary);
   font-size: 14px;
   line-height: 1.6;
+}
+
+/* IP形象页专属插画背景通透层与卡片质感 */
+body.ip-page .ip-title-section {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 24px 28px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 8px 24px rgba(44, 62, 80, 0.06);
+}
+
+body.ip-page .ip-character-box {
+  background: linear-gradient(135deg, rgba(240, 248, 255, 0.82), rgba(135, 206, 235, 0.65));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 10px 28px rgba(58, 145, 198, 0.16);
+}
+
+body.ip-page .ip-story-section,
+body.ip-page .ip-appearance-section,
+body.ip-page .ip-personality-section {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 8px 24px rgba(44, 62, 80, 0.06);
+}
+
+body.ip-page .ip-video-section {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 24px 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 24px rgba(44, 62, 80, 0.06);
+}
+
+body.ip-page .ip-friends {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 28px 24px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 8px 24px rgba(44, 62, 80, 0.06);
+}
+
+body.ip-page .friend-card {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+body.ip-page .app-footer {
+  color: #1a4968;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
 /* Process Page Styles - Event Agency Design System */
